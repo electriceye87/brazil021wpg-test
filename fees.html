@@ -5,24 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Membership & Fees | Brazil 021 Winnipeg</title>
     <style>
-       /* --- BRAND COLORS MATCHED TO INDEX.HTML --- */
-:root {
-    --brazil-green: #2d5f42;   /* The Deep Forest Green */
-    --brazil-yellow: #fdd835;  /* The Bright Yellow */
-    --brazil-blue: #5d76a0;    /* The Slate Blue */
-    --text-dark: #1a1a1a;
-    --bg-light: #f4f6f5;
-    --white: #ffffff;
-}
+        /* --- BRAND COLORS --- */
+        :root {
+            --brazil-green: #2d5f42;
+            --brazil-yellow: #fdd835;
+            --brazil-blue: #5d76a0;
+            --text-dark: #1a1a1a;
+            --bg-light: #f4f6f5;
+            --white: #ffffff;
+        }
 
-        * * { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-}
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+        }
 
-        /* NAVIGATION - MATCHING INDEX.HTML */
+        html { scroll-behavior: smooth; }
+
+        /* NAVIGATION */
         nav {
             display: flex;
             justify-content: space-between;
@@ -35,7 +37,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .logo-text img { height: 85px; } /* Large logo as requested */
+        .logo-text img { height: 85px; }
 
         .nav-links a {
             text-decoration: none;
@@ -43,6 +45,64 @@
             margin-left: 20px;
             font-weight: 600;
             transition: 0.3s;
+        }
+
+        /* --- MOBILE MENU & HAMBURGER --- */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 3000; /* Keeps X above the menu */
+            padding: 5px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--brazil-green);
+            transition: 0.3s ease-in-out;
+        }
+
+        /* The X Animation - Must come after the base span styles */
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+            background-color: white;
+        }
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+            background-color: white;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            height: 100vh;
+            background-color: var(--brazil-green);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            transition: 0.3s ease-in-out;
+            z-index: 2500;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
         /* PAGE CONTENT */
@@ -59,7 +119,6 @@
             font-size: 1.8rem;
         }
 
-        /* PRICING GRID */
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -77,7 +136,6 @@
             transition: 0.3s;
         }
         .price-card:hover { transform: translateY(-5px); border-color: var(--brazil-green); }
-        
         .price-card.featured { border: 2px solid var(--brazil-green); position: relative; }
         .featured-tag { 
             position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
@@ -92,7 +150,6 @@
         .features li { margin-bottom: 10px; color: #555; }
         .features li::before { content: "✓"; color: var(--brazil-green); font-weight: bold; margin-right: 10px; }
 
-        /* BUTTONS - MATCHING THE HERO BUTTON STYLE */
         .pay-btn {
             display: block;
             width: 100%;
@@ -107,162 +164,39 @@
         }
         .pay-btn:hover { background: var(--brazil-green); color: white; }
 
-        /* FOOTER - MATCHING INDEX.HTML */
+        .faq-container { margin-top: 30px; text-align: left; }
+        .faq-item { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .faq-item h3 { color: var(--brazil-green); font-size: 1.2rem; margin-bottom: 8px; }
+        .faq-item p { color: #555; line-height: 1.6; }
+
+        /* FOOTER */
         footer {
-    background-color: var(--brazil-green); /* #2d5f42 */
-    color: var(--white);
-    padding: 60px 5% 40px 5%; /* Generous padding for a professional feel */
-    text-align: center;
-    margin-top: 60px;
-}
-
-.footer-contact p {
-    margin: 15px 0;
-    font-size: 1.1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.footer-contact span {
-    font-size: 1.2rem;
-}
-
-.footer-contact a {
-    color: var(--brazil-yellow);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.social-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 25px;
-    padding: 10px 20px;
-    border: 1px solid var(--brazil-yellow);
-    border-radius: 5px;
-    color: var(--brazil-yellow) !important;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    text-decoration: none;
-}
-
-.footer-bottom {
-    margin-top: 40px;
-    font-size: 0.85rem;
-    opacity: 0.8;
-}
-
-.home-link {
-    color: var(--white);
-    text-decoration: underline;
-    margin-left: 10px;
-}
-        @media (max-width: 768px) {
-            .nav-links { display: none; } /* Consider adding your hamburger menu here later */
-            h1 { font-size: 2rem; }
+            background-color: var(--brazil-green);
+            color: var(--white);
+            padding: 60px 5% 40px 5%;
+            text-align: center;
+            margin-top: 60px;
         }
-.faq-container {
-    margin-top: 30px;
-    text-align: left; /* Ensures text stays left-aligned */
-}
 
-.faq-item {
-    margin-bottom: 25px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
-}
+        .home-link { color: var(--white); text-decoration: underline; margin-left: 10px; }
 
-.faq-item h3 {
-    color: var(--brazil-green); /* This uses #2d5f42 from your index */
-    font-size: 1.2rem;
-    margin-bottom: 8px;
-}
-
-.faq-item p {
-    color: #555;
-    line-height: 1.6;
-}
-html {
-    scroll-behavior: smooth;
-}
-/* HAMBURGER STYLING */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-    z-index: 2000;
-}
-
-.hamburger span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: var(--brazil-green);
-    transition: 0.3s;
-}
-
-/* MOBILE MENU OVERLAY */
-.mobile-menu {
-    position: fixed;
-    top: 0;
-    right: -100%; /* Hidden by default */
-    width: 70%;
-    height: 100vh;
-    background-color: var(--brazil-green);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    transition: 0.3s ease-in-out;
-    z-index: 1500;
-}
-
-.mobile-menu.active {
-    right: 0; /* Slides in */
-}
-
-.mobile-menu a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-/* TABLET/MOBILE RULES */
-@media (max-width: 768px) {
-    .nav-links { display: none; }
-    .hamburger { display: flex; }
-}
+        @media (max-width: 768px) {
+            .nav-links { display: none !important; }
+            .hamburger { display: flex !important; }
+        }
     </style>
 </head>
-<script>
-    function toggleMenu() {
-        const menu = document.getElementById('mobileMenu');
-        menu.classList.toggle('active');
-        
-        // Optional: Animate hamburger into an 'X'
-        const spans = document.querySelectorAll('.hamburger span');
-        spans.forEach((span, index) => {
-            // Add animation logic here if you want it to turn into an X
-        });
-    }
-</script>
 <body>
 
-  <nav>
+<nav>
     <div class="logo-text">
         <a href="index.html"><img src="logo.webp" alt="Brazil 021 Logo"></a>
     </div>
     
     <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="fees.html" style="color: var(--brazil-yellow);">Membership</a>
+        <a href="fees.html" style="color: var(--brazil-yellow);">Membership & Fees</a>
+        <a href="#faq">FAQ</a>
         <a href="index.html#contact">Contact</a>
     </div>
 
@@ -275,148 +209,124 @@ html {
 
 <div class="mobile-menu" id="mobileMenu">
     <a href="index.html" onclick="toggleMenu()">Home</a>
-    <a href="fees.html" onclick="toggleMenu()">Membership</a>
-    <a href="index.html#contact" onclick="toggleMenu()">Contact</a>
+    <a href="fees.html" onclick="toggleMenu()">Membership & Fees</a>
     <a href="#faq" onclick="toggleMenu()">FAQ</a>
+    <a href="index.html#contact" onclick="toggleMenu()">Contact</a>
 </div>
 
-    <div class="container">
-        <h1>Membership & Fees</h1>
-        <p class="subtitle">Winnipeg's Premier BJJ Academy Branding & Pricing</p>
+<div class="container">
+    <h1>Membership & Fees</h1>
+    <p class="subtitle">Winnipeg's Premier BJJ Academy Branding & Pricing</p>
 
-        <div class="fee-section">
-            <h2 class="section-title">Monthly Memberships</h2>
-            <div class="pricing-grid">
-                <div class="price-card">
-                    <div class="tier-name">Individual</div>
-                    <div class="price">$93<span>/mo</span></div>
-                    <ul class="features">
-                        <li>Unlimited Adult/Teen Classes</li>
-                        <li>No Registration Fees</li>
-                    </ul>
-                    <a href="#LINK" class="pay-btn">Pay Now</a>
-                </div>
-                <div class="price-card">
-                    <div class="tier-name">Family (2 members)</div>
-                    <div class="price">$135<span>/mo</span></div>
-                    <ul class="features">
-                        <li>Covers 2 Family Members</li>
-                        <li>50% Off 2nd Member</li>
-                    </ul>
-                    <a href="https://square.link/u/rEJrXQuy?src=embed" class="pay-btn">Pay Now</a>
-                </div>
-                <div class="price-card featured">
-                    <div class="featured-tag">Value</div>
-                    <div class="tier-name">Family (3 members)</div>
-                    <div class="price">$162<span>/mo</span></div>
-                    <ul class="features">
-                        <li>Covers 3 Family Members</li>
-                        <li>75% Off 3rd Member</li>
-                    </ul>
-                    <a href="https://square.link/u/rcIeq8pq?src=embed" class="pay-btn">Pay Now</a>
-                </div>
-                <div class="price-card">
-                    <div class="tier-name">Family (4 members)</div>
-                    <div class="price">$180<span>/mo</span></div>
-                    <ul class="features">
-                        <li>Covers 4 Family Members</li>
-                        <li>Maximum Savings</li>
-                    </ul>
-                    <a href="https://square.link/u/KHMvbd5w?src=embed" class="pay-btn">Pay Now</a>
-                </div>
+    <div class="fee-section">
+        <h2 class="section-title">Monthly Memberships</h2>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="tier-name">Individual</div>
+                <div class="price">$93<span>/mo</span></div>
+                <ul class="features">
+                    <li>Unlimited Adult/Teen Classes</li>
+                    <li>No Registration Fees</li>
+                </ul>
+                <a href="#LINK" class="pay-btn">Pay Now</a>
             </div>
-        </div>
-
-        <div class="fee-section">
-            <h2 class="section-title">Drop-ins</h2>
-            <div class="pricing-grid">
-                <div class="price-card">
-                    <div class="tier-name">Single Session</div>
-                    <div class="price">$15.50<span>/class</span></div>
-                    <a href="https://square.link/u/wHJAMWi3?src=embed" class="pay-btn">Pay Now</a>
-                </div>
+            <div class="price-card">
+                <div class="tier-name">Family (2 members)</div>
+                <div class="price">$135<span>/mo</span></div>
+                <ul class="features"><li>Covers 2 Family Members</li><li>50% Off 2nd Member</li></ul>
+                <a href="https://square.link/u/rEJrXQuy?src=embed" class="pay-btn">Pay Now</a>
             </div>
-        </div>
-
-        <div class="fee-section">
-            <h2 class="section-title">Private Instruction</h2>
-            <div class="pricing-grid">
-                <div class="price-card">
-                    <div class="tier-name">1 Hour Private Lesson (1-2 Students)</div>
-                    <div class="price">$71.75<span>/hr</span></div>
-                    <a href="https://square.link/u/ZVdgUIRE?src=embed" class="pay-btn">Pay Now</a>
-                </div>
-                <div class="price-card">
-                    <div class="tier-name">5-Pack Private Lessons (1-2 Students)</div>
-                    <div class="price">$307.50<span>/hr</span></div>
-                    <a href="https://square.link/u/oC1rRQYr?src=embed" class="pay-btn">Pay Now</a>
-                </div>
+            <div class="price-card featured">
+                <div class="featured-tag">Value</div>
+                <div class="tier-name">Family (3 members)</div>
+                <div class="price">$162<span>/mo</span></div>
+                <ul class="features"><li>Covers 3 Family Members</li><li>75% Off 3rd Member</li></ul>
+                <a href="https://square.link/u/rcIeq8pq?src=embed" class="pay-btn">Pay Now</a>
+            </div>
+            <div class="price-card">
+                <div class="tier-name">Family (4 members)</div>
+                <div class="price">$180<span>/mo</span></div>
+                <ul class="features"><li>Covers 4 Family Members</li><li>Maximum Savings</li></ul>
+                <a href="https://square.link/u/KHMvbd5w?src=embed" class="pay-btn">Pay Now</a>
             </div>
         </div>
     </div>
 
+    <div class="fee-section">
+        <h2 class="section-title">Drop-ins</h2>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="tier-name">Single Session</div>
+                <div class="price">$15.50<span>/class</span></div>
+                <a href="https://square.link/u/wHJAMWi3?src=embed" class="pay-btn">Pay Now</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="fee-section">
+        <h2 class="section-title">Private Instruction</h2>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="tier-name">1 Hour Private Lesson (1-2 Students)</div>
+                <div class="price">$71.75<span>/hr</span></div>
+                <a href="https://square.link/u/ZVdgUIRE?src=embed" class="pay-btn">Pay Now</a>
+            </div>
+            <div class="price-card">
+                <div class="tier-name">5-Pack Private Lessons (1-2 Students)</div>
+                <div class="price">$307.50<span>/hr</span></div>
+                <a href="https://square.link/u/oC1rRQYr?src=embed" class="pay-btn">Pay Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <section id="faq" style="background-color: var(--bg-light); padding: 80px 0; width: 100%;">
     <div class="fee-section" style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
         <h2 class="section-title">Frequently Asked Questions</h2>
-        
-        <div class="faq-container" style="text-align: left; margin-top: 40px;">
-            <div class="faq-item" style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.05);">
-                <h3 style="color: var(--brazil-green); font-size: 1.2rem; margin-bottom: 8px;">Do I need a Gi for my first class? Do I need anything else?</h3>
-                <p style="color: #555; line-height: 1.6;">No! For your free trial, comfortable workout clothes like a t-shirt and shorts are perfect. If you decide to join, we can help you select the right Gi. As well, please make sure you sign up at this link.</p>
+        <div class="faq-container">
+            <div class="faq-item">
+                <h3>Do I need a Gi for my first class? Do I need anything else?</h3>
+                <p>No! For your free trial, comfortable workout clothes like a t-shirt and shorts are perfect. If you decide to join, we can help you select the right Gi. As well, please make sure you sign up at this link.</p>
             </div>
-
-            <div class="faq-item" style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.05);">
-                <h3 style="color: var(--brazil-green); font-size: 1.2rem; margin-bottom: 8px;">Are there any long-term contracts?</h3>
-                <p style="color: #555; line-height: 1.6;">We believe in the quality of our instruction. All our memberships are month-to-month with no long-term commitment required.</p>
+            <div class="faq-item">
+                <h3>Are there any long-term contracts?</h3>
+                <p>We believe in the quality of our instruction. All our memberships are month-to-month with no long-term commitment required.</p>
             </div>
-
-            <div class="faq-item" style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.05);">
-                <h3 style="color: var(--brazil-green); font-size: 1.2rem; margin-bottom: 8px;">Are classes seasonal?</h3>
-                <p style="color: #555; line-height: 1.6;">Generally, our classes run year round. On occasion, classes may be cancelled, so please contact us for the most current information.</p>
+            <div class="faq-item">
+                <h3>Are classes seasonal?</h3>
+                <p>Generally, our classes run year round. On occasion, classes may be cancelled, so please contact us for the most current information.</p>
             </div>
-
-            <div class="faq-item" style="margin-bottom: 0; padding-bottom: 0;">
-                <h3 style="color: var(--brazil-green); font-size: 1.2rem; margin-bottom: 8px;">Do you offer discounts?</h3>
-                <p style="color: #555; line-height: 1.6;">Yes! We do offer slight discounts for cash end E-Transfer payments. Please contact us for more information.</p>
+            <div class="faq-item" style="border-bottom: none;">
+                <h3>Do you offer discounts?</h3>
+                <p>Yes! We do offer slight discounts for cash end E-Transfer payments. Please contact us for more information.</p>
             </div>
         </div>
     </div>
 </section>
 
- <footer style="padding-top: 2rem;">
-        
-        <div style="margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; border: 2px solid #333; max-width: 600px; margin-left: auto; margin-right: auto;">
-        <iframe 
-            width="100%" 
-            height="250" 
-            frameborder="0" 
-            style="border:0" 
-            src="https://maps.google.com/maps?q=1000+Notre+Dame+Ave,+Winnipeg,+MB&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-            allowfullscreen>
-        </iframe>
-        </div>
+<footer style="padding-top: 2rem;">
+    <div style="margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; border: 2px solid #333; max-width: 600px; margin-left: auto; margin-right: auto;">
+        <iframe width="100%" height="250" frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2570.627341355416!2d-97.1685736234857!3d49.90547745585501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x52ea73f089608991%3A0xc3f84860d5c34537!2s1000%20Notre%20Dame%20Ave%2C%20Winnipeg%2C%20MB%20R3E%200N2!5e0!3m2!1sen!2sca!4v1715632204680!5m2!1sen!2sca" allowfullscreen></iframe>
+    </div>
+    <p style="margin-bottom: 1.5rem; color: #ccc;">
+        <strong>Brazil-021 Winnipeg</strong><br>
+        1000 Notre Dame Ave, Winnipeg, MB
+    </p>
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem;">
+        <a href="tel:4319975514" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">📞 (431) 997-5514</a>
+        <a href="mailto:Brazil021wpg@gmail.com" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">✉️ Brazil021wpg@gmail.com</a>
+        <a href="https://www.instagram.com/brazil021wpg" target="_blank" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">📸 @brazil021wpg</a>
+    </div>
+    <p style="opacity: 0.5; font-size: 0.8rem;">© 2025 Brazil-021 Winnipeg. <a href="index.html" class="home-link">Back to Home</a></p>
+</footer>
 
-        <p style="margin-bottom: 1.5rem; color: #ccc;">
-            <strong>Brazil-021 Winnipeg</strong><br>
-            1000 Notre Dame Ave, Winnipeg, MB
-        </p>
-        
-        <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem;">
-    <a href="tel:4319975514" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">
-        📞 (431) 997-5514
-    </a>
-    
-    <a href="mailto:Brazil021wpg@gmail.com" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">
-        ✉️ Brazil021wpg@gmail.com
-    </a>
-
-    <a href="https://www.instagram.com/brazil021wpg" target="_blank" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">
-        📸 @brazil021wpg
-    </a>
-</div>
-        
-        <p style="opacity: 0.5; font-size: 0.8rem;">© 2025 Brazil-021 Winnipeg. <a href="index.html" class="home-link">Back to Home</a></p>
-    </footer>
-
+<script>
+    function toggleMenu() {
+        // Toggle the active class for the menu sliding
+        document.getElementById('mobileMenu').classList.toggle('active');
+        // Toggle the open class for the hamburger animation
+        document.querySelector('.hamburger').classList.toggle('open');
+    }
+</script>
 </body>
 </html>

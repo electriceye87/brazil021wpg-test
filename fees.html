@@ -5,16 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Membership & Fees | Brazil 021 Winnipeg</title>
     <style>
-        /* BRANDING - MATCHING INDEX.HTML */
-        :root {
-            --brazil-green: #009739;
-            --brazil-yellow: #fed100;
-            --brazil-blue: #002776;
-            --text-dark: #333;
-            --light-bg: #f4f4f4;
-        }
+       /* --- BRAND COLORS MATCHED TO INDEX.HTML --- */
+:root {
+    --brazil-green: #2d5f42;   /* The Deep Forest Green */
+    --brazil-yellow: #fdd835;  /* The Bright Yellow */
+    --brazil-blue: #5d76a0;    /* The Slate Blue */
+    --text-dark: #1a1a1a;
+    --bg-light: #f4f6f5;
+    --white: #ffffff;
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        * * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+}
 
         /* NAVIGATION - MATCHING INDEX.HTML */
         nav {
@@ -102,12 +108,87 @@
         .pay-btn:hover { background: var(--brazil-green); color: white; }
 
         /* FOOTER - MATCHING INDEX.HTML */
-        footer { background: var(--brazil-blue); color: white; padding: 40px 5%; text-align: center; margin-top: 50px; }
+        footer {
+    background-color: var(--brazil-green); /* #2d5f42 */
+    color: var(--white);
+    padding: 60px 5% 40px 5%; /* Generous padding for a professional feel */
+    text-align: center;
+    margin-top: 60px;
+}
 
+.footer-contact p {
+    margin: 15px 0;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-contact span {
+    font-size: 1.2rem;
+}
+
+.footer-contact a {
+    color: var(--brazil-yellow);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 25px;
+    padding: 10px 20px;
+    border: 1px solid var(--brazil-yellow);
+    border-radius: 5px;
+    color: var(--brazil-yellow) !important;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    margin-top: 40px;
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.home-link {
+    color: var(--white);
+    text-decoration: underline;
+    margin-left: 10px;
+}
         @media (max-width: 768px) {
             .nav-links { display: none; } /* Consider adding your hamburger menu here later */
             h1 { font-size: 2rem; }
         }
+.faq-container {
+    margin-top: 30px;
+    text-align: left; /* Ensures text stays left-aligned */
+}
+
+.faq-item {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.faq-item h3 {
+    color: var(--brazil-green); /* This uses #2d5f42 from your index */
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.faq-item p {
+    color: #555;
+    line-height: 1.6;
+}
+html {
+    scroll-behavior: smooth;
+}
     </style>
 </head>
 <body>
@@ -116,7 +197,8 @@
         <div class="logo-text"><a href="index.html"><img src="logo.webp" alt="Brazil 021 Logo"></a></div>
         <div class="nav-links">
             <a href="index.html">Home</a>
-            <a href="fees.html">Membership</a>
+            <a href="fees.html">Membership & Fees</a>
+            <a href="#faq">FAQ</a>
             <a href="index.html#contact">Contact</a>
         </div>
     </nav>
@@ -130,40 +212,40 @@
             <div class="pricing-grid">
                 <div class="price-card">
                     <div class="tier-name">Individual</div>
-                    <div class="price">$90<span>/mo</span></div>
+                    <div class="price">$93<span>/mo</span></div>
                     <ul class="features">
                         <li>Unlimited Adult/Teen Classes</li>
                         <li>No Registration Fees</li>
                     </ul>
-                    <a href="#LINK" class="pay-btn">Subscribe</a>
+                    <a href="#LINK" class="pay-btn">Pay Now</a>
                 </div>
                 <div class="price-card">
-                    <div class="tier-name">Family (2)</div>
+                    <div class="tier-name">Family (2 members)</div>
                     <div class="price">$135<span>/mo</span></div>
                     <ul class="features">
                         <li>Covers 2 Family Members</li>
                         <li>50% Off 2nd Member</li>
                     </ul>
-                    <a href="#LINK" class="pay-btn">Subscribe</a>
+                    <a href="https://square.link/u/rEJrXQuy?src=embed" class="pay-btn">Pay Now</a>
                 </div>
                 <div class="price-card featured">
                     <div class="featured-tag">Value</div>
-                    <div class="tier-name">Family (3)</div>
-                    <div class="price">$157.50<span>/mo</span></div>
+                    <div class="tier-name">Family (3 members)</div>
+                    <div class="price">$162<span>/mo</span></div>
                     <ul class="features">
                         <li>Covers 3 Family Members</li>
                         <li>75% Off 3rd Member</li>
                     </ul>
-                    <a href="#LINK" class="pay-btn">Subscribe</a>
+                    <a href="https://square.link/u/rcIeq8pq?src=embed" class="pay-btn">Pay Now</a>
                 </div>
                 <div class="price-card">
-                    <div class="tier-name">Family (4)</div>
+                    <div class="tier-name">Family (4 members)</div>
                     <div class="price">$180<span>/mo</span></div>
                     <ul class="features">
                         <li>Covers 4 Family Members</li>
                         <li>Maximum Savings</li>
                     </ul>
-                    <a href="#LINK" class="pay-btn">Subscribe</a>
+                    <a href="https://square.link/u/KHMvbd5w?src=embed" class="pay-btn">Pay Now</a>
                 </div>
             </div>
         </div>
@@ -173,13 +255,8 @@
             <div class="pricing-grid">
                 <div class="price-card">
                     <div class="tier-name">Single Session</div>
-                    <div class="price">$15<span>/class</span></div>
-                    <a href="#LINK" class="pay-btn">Buy Pass</a>
-                </div>
-                <div class="price-card">
-                    <div class="tier-name">10-Class Card</div>
-                    <div class="price">$130<span>/total</span></div>
-                    <a href="#LINK" class="pay-btn">Buy Card</a>
+                    <div class="price">$15.50<span>/class</span></div>
+                    <a href="https://square.link/u/wHJAMWi3?src=embed" class="pay-btn">Pay Now</a>
                 </div>
             </div>
         </div>
@@ -188,21 +265,80 @@
             <h2 class="section-title">Private Instruction</h2>
             <div class="pricing-grid">
                 <div class="price-card">
-                    <div class="tier-name">1-on-1 Private</div>
-                    <div class="price">$70<span>/hr</span></div>
-                    <a href="#LINK" class="pay-btn">Book Now</a>
+                    <div class="tier-name">1 Hour Private Lesson (1-2 Students)</div>
+                    <div class="price">$71.75<span>/hr</span></div>
+                    <a href="https://square.link/u/ZVdgUIRE?src=embed" class="pay-btn">Pay Now</a>
                 </div>
                 <div class="price-card">
-                    <div class="tier-name">Semi-Private (2)</div>
-                    <div class="price">$100<span>/hr</span></div>
-                    <a href="#LINK" class="pay-btn">Book Now</a>
+                    <div class="tier-name">5-Pack Private Lessons (1-2 Students)</div>
+                    <div class="price">$307.50<span>/hr</span></div>
+                    <a href="https://square.link/u/oC1rRQYr?src=embed" class="pay-btn">Pay Now</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2024 Brazil 021 Winnipeg. <a href="index.html" style="color: white; margin-left: 10px;">Back to Home</a></p>
+<section id="faq" style="background-color: var(--bg-light); padding: 80px 0; width: 100%;">
+    <div class="fee-section" style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-container" style="text-align: left; margin-top: 40px;">
+            <div class="faq-item" style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.05);">
+                <h3 style="color: var(--brazil-green); font-size: 1.2rem; margin-bottom: 8px;">Do I need a Gi for my first class? Do I need anything else?</h3>
+                <p style="color: #555; line-height: 1.6;">No! For your free trial, comfortable workout clothes like a t-shirt and shorts are perfect. If you decide to join, we can help you select the right Gi. As well, please make sure you sign up at this link.</p>
+            </div>
+
+            <div class="faq-item" style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.05);">
+                <h3 style="color: var(--brazil-green); font-size: 1.2rem; margin-bottom: 8px;">Are there any long-term contracts?</h3>
+                <p style="color: #555; line-height: 1.6;">We believe in the quality of our instruction. All our memberships are month-to-month with no long-term commitment required.</p>
+            </div>
+
+            <div class="faq-item" style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.05);">
+                <h3 style="color: var(--brazil-green); font-size: 1.2rem; margin-bottom: 8px;">Are classes seasonal?</h3>
+                <p style="color: #555; line-height: 1.6;">Generally, our classes run year round. On occasion, classes may be cancelled, so please contact us for the most current information.</p>
+            </div>
+
+            <div class="faq-item" style="margin-bottom: 0; padding-bottom: 0;">
+                <h3 style="color: var(--brazil-green); font-size: 1.2rem; margin-bottom: 8px;">Do you offer discounts?</h3>
+                <p style="color: #555; line-height: 1.6;">Yes! We do offer slight discounts for cash end E-Transfer payments. Please contact us for more information.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+ <footer style="padding-top: 2rem;">
+        
+        <div style="margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; border: 2px solid #333; max-width: 600px; margin-left: auto; margin-right: auto;">
+        <iframe 
+            width="100%" 
+            height="250" 
+            frameborder="0" 
+            style="border:0" 
+            src="https://maps.google.com/maps?q=1000+Notre+Dame+Ave,+Winnipeg,+MB&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+            allowfullscreen>
+        </iframe>
+        </div>
+
+        <p style="margin-bottom: 1.5rem; color: #ccc;">
+            <strong>Brazil-021 Winnipeg</strong><br>
+            1000 Notre Dame Ave, Winnipeg, MB
+        </p>
+        
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem;">
+    <a href="tel:4319975514" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">
+        📞 (431) 997-5514
+    </a>
+    
+    <a href="mailto:Brazil021wpg@gmail.com" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">
+        ✉️ Brazil021wpg@gmail.com
+    </a>
+
+    <a href="https://www.instagram.com/brazil021wpg" target="_blank" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">
+        📸 @brazil021wpg
+    </a>
+</div>
+        
+        <p style="opacity: 0.5; font-size: 0.8rem;">© 2025 Brazil-021 Winnipeg. <a href="index.html" class="home-link">Back to Home</a></p>
     </footer>
 
 </body>

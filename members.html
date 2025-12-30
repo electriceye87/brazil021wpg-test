@@ -12,60 +12,103 @@
             --brazil-blue: #5d76a0;
             --text-dark: #1a1a1a;
             --bg-light: #f4f6f5;
-            --white: #ffffff;
         }
 
+        html { scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
-
-        /* --- PASSWORD GATE --- */
-        #passwordGate { position: fixed; inset: 0; background-color: var(--brazil-green); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; color: white; text-align: center; padding: 20px; }
-        #passwordGate img { height: 100px; margin-bottom: 20px; }
-        #passwordGate input { width: 100%; max-width: 280px; padding: 15px; margin: 10px 0; border-radius: 5px; border: none; font-size: 16px; text-align: center; }
-        #passwordGate button { width: 100%; max-width: 280px; padding: 15px; background: var(--brazil-yellow); color: var(--brazil-green); border: none; border-radius: 5px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        body { background-color: var(--bg-light); color: var(--text-dark); }
 
         /* --- NAVIGATION --- */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; background: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; background: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); height: 100px; }
         .logo-text img { height: 85px; }
-        .nav-links a { text-decoration: none; color: var(--text-dark); margin-left: 20px; font-weight: 600; }
+        
+        .nav-links { display: flex; align-items: center; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.95rem; }
+        .nav-links .active-link { color: var(--brazil-green); border-bottom: 2px solid var(--brazil-yellow); }
+        .section-jump { color: var(--brazil-blue) !important; font-size: 0.85rem !important; text-transform: uppercase; }
 
-        /* --- PORTAL HERO --- */
+        /* --- CLEAN HAMBURGER (NO GREEN BOX) --- */
+        .hamburger { 
+            display: none; 
+            flex-direction: column; 
+            gap: 6px; 
+            cursor: pointer; 
+            background: none; 
+            border: none; 
+            padding: 10px; 
+        }
+        .hamburger span { 
+            display: block; 
+            width: 30px; 
+            height: 3px; 
+            background-color: var(--brazil-green); 
+            border-radius: 3px; 
+        }
+
+        /* --- MOBILE MENU OVERLAY (GREEN BACKGROUND) --- */
+        @media (max-width: 900px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                display: none; 
+                position: fixed; top: 0; right: 0; width: 100%; height: 100vh;
+                background: var(--brazil-green); 
+                flex-direction: column; justify-content: center;
+                z-index: 2000;
+            }
+            .nav-links.open { display: flex; }
+            
+            .nav-links a { color: white !important; font-size: 1.5rem !important; margin: 15px 0; font-weight: bold; text-transform: uppercase; }
+            .section-jump { color: var(--brazil-yellow) !important; } 
+            
+            .close-btn { 
+                display: block !important; 
+                color: white; 
+                font-weight: bold; 
+                margin-bottom: 50px; 
+                cursor: pointer; 
+                font-size: 1rem; 
+                text-transform: uppercase; 
+                letter-spacing: 2px;
+                border: 1px solid rgba(255,255,255,0.4);
+                padding: 10px 25px;
+                border-radius: 5px;
+            }
+        }
+
+        /* --- PORTAL ELEMENTS --- */
+        #passwordGate { position: fixed; inset: 0; background-color: var(--brazil-green); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; color: white; text-align: center; padding: 20px; }
+        #passwordGate img { height: 100px; margin-bottom: 20px; }
+        #passwordGate input { width: 100%; max-width: 280px; padding: 15px; margin: 10px 0; border-radius: 5px; border: none; text-align: center; font-size: 16px; outline: none; }
+        #passwordGate button { width: 100%; max-width: 280px; padding: 15px; background: var(--brazil-yellow); color: var(--brazil-green); border: none; border-radius: 5px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+
         .portal-hero { background: var(--brazil-green); color: white; padding: 50px 20px; text-align: center; }
-        .portal-hero h1 { font-size: 2.5rem; color: var(--brazil-yellow); margin-bottom: 10px; }
-
-        /* --- CONTAINER --- */
+        .portal-hero h1 { color: var(--brazil-yellow); font-size: 2.5rem; }
         .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
-        .portal-section { background: white; border-radius: 12px; padding: 30px; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .portal-section { background: white; border-radius: 12px; padding: 30px; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); scroll-margin-top: 120px; }
         .section-title { color: var(--brazil-green); border-left: 6px solid var(--brazil-yellow); padding-left: 15px; margin-bottom: 25px; font-size: 1.6rem; text-transform: uppercase; }
 
-        /* --- NEWSLETTERS --- */
-        .newsletter-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #eee; }
-        .newsletter-item:last-child { border-bottom: none; }
-        .newsletter-item a { background: var(--brazil-yellow); color: var(--brazil-green); padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.85rem; }
-
-        /* --- VIDEO DASHBOARD --- */
-        .video-controls { margin-bottom: 30px; background: #f9f9f9; padding: 20px; border-radius: 10px; border: 1px solid #eee; }
-        #portalSearch { width: 100%; padding: 12px 20px; border-radius: 8px; border: 2px solid #ddd; font-size: 1rem; outline: none; margin-bottom: 20px; }
+        /* VIDEO DASHBOARD */
+        .video-controls { margin-bottom: 30px; background: #f9f9f9; padding: 20px; border-radius: 10px; }
+        #portalSearch { width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #ddd; margin-bottom: 20px; outline: none; }
         .filter-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-        .filter-btn { padding: 6px 15px; border-radius: 5px; border: 1px solid var(--brazil-green); background: white; color: var(--brazil-green); font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
-        .filter-btn.active, .filter-btn:hover { background: var(--brazil-green); color: white; }
+        .filter-btn { padding: 8px 15px; border-radius: 5px; border: 1px solid var(--brazil-green); background: white; cursor: pointer; font-weight: bold; color: var(--brazil-green); }
+        .filter-btn.active { background: var(--brazil-green); color: white; }
 
         .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
         .video-item { background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
         .video-card { position: relative; padding-top: 56.25%; background: #000; }
         .video-card iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
         .video-info { padding: 15px; }
-        .video-title { font-weight: bold; color: var(--brazil-green); font-size: 1.1rem; }
-        .video-tag { display: inline-block; background: var(--bg-light); padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; margin-top: 5px; color: #666; font-weight: bold; }
+        .video-tag { display: inline-block; background: var(--bg-light); padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; }
 
         footer { background-color: var(--brazil-green); color: white; padding: 60px 20px; text-align: center; }
+        .close-btn { display: none; }
     </style>
 </head>
 <body>
 
 <div id="passwordGate">
     <img src="logo.webp" alt="Logo">
-    <h2>Members Portal Access</h2>
     <input type="password" id="passInput" placeholder="Password">
     <button onclick="checkPassword()">Enter Portal</button>
 </div>
@@ -73,10 +116,19 @@
 <div id="memberContent" style="display: none;">
     <nav>
         <div class="logo-text"><a href="index.html"><img src="logo.webp" alt="Logo"></a></div>
-        <div class="nav-links">
+        <button class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-links" id="navLinks">
+            <span class="close-btn" onclick="toggleMenu()">✕ CLOSE</span>
             <a href="index.html">Home</a>
-            <a href="fees.html">Membership</a>
-            <a href="members.html" style="color: var(--brazil-yellow);">Portal</a>
+            <a href="#section-news" class="section-jump" onclick="toggleMenu()">News</a>
+            <a href="#section-newsletters" class="section-jump" onclick="toggleMenu()">Newsletters</a>
+            <a href="#section-videos" class="section-jump" onclick="toggleMenu()">Videos</a>
+            <a href="members.html" class="active-link">Portal</a>
         </div>
     </nav>
 
@@ -86,17 +138,17 @@
     </div>
 
     <div class="container">
-        <section class="portal-section">
+        <section id="section-news" class="portal-section">
             <h2 class="section-title">Latest News</h2>
             <div id="news-container">Loading news...</div>
         </section>
 
-        <section class="portal-section">
+        <section id="section-newsletters" class="portal-section">
             <h2 class="section-title">Newsletter Archive</h2>
             <div id="newsletter-container">Loading newsletters...</div>
         </section>
 
-        <section class="portal-section">
+        <section id="section-videos" class="portal-section">
             <h2 class="section-title">Technique Library</h2>
             <div class="video-controls">
                 <input type="text" id="portalSearch" placeholder="Search techniques..." onkeyup="runFilters()">
@@ -109,7 +161,7 @@
                     <button class="filter-btn" onclick="setCategory('back', this)">Back</button>
                 </div>
             </div>
-            <div class="video-grid" id="video-container">Loading techniques...</div>
+            <div class="video-grid" id="video-container">Loading...</div>
         </section>
     </div>
 
@@ -122,13 +174,18 @@
     let currentCategory = 'all';
     let videoData = [];
 
-    // --- MAIN PORTAL LOGIC ---
+    function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('open');
+    }
+
     function checkPassword() {
         if (document.getElementById('passInput').value === "Brazil021") {
             document.getElementById('passwordGate').style.display = "none";
             document.getElementById('memberContent').style.display = "block";
-            loadAllPortalData();
             window.scrollTo(0,0);
+            loadAllPortalData();
+        } else {
+            alert("Incorrect password.");
         }
     }
 
@@ -140,20 +197,19 @@
 
     async function loadSection(file, containerId, renderFunc) {
         try {
-            const response = await fetch(file);
+            const response = await fetch(file + '?t=' + new Date().getTime());
             const data = await response.json();
             if (file === 'videos.json') videoData = data;
             renderFunc(data, containerId);
         } catch (e) {
-            document.getElementById(containerId).innerHTML = "<p>Resources coming soon.</p>";
+            document.getElementById(containerId).innerHTML = "<p>Coming soon.</p>";
         }
     }
 
-    // --- RENDER FUNCTIONS ---
     function renderNews(data, id) {
         let html = '';
         data.forEach(item => {
-            html += `<div style="background:#f9f9f9; padding:20px; border-radius:8px; border-left:4px solid var(--brazil-green); margin-bottom:15px;">
+            html += `<div style="background:#f9f9f9; padding:20px; border-radius:8px; border-left:4px solid var(--brazil-green); margin-bottom:15px; text-align:left;">
                 <h3 style="color:var(--brazil-green)">${item.title}</h3><p>${item.body}</p><small>${item.date}</small></div>`;
         });
         document.getElementById(id).innerHTML = html;
@@ -178,7 +234,6 @@
         runFilters();
     }
 
-    // --- FILTER LOGIC ---
     function setCategory(cat, btn) {
         currentCategory = cat;
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -196,7 +251,9 @@
         }
     }
 
-    document.getElementById('passInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') checkPassword(); });
+    document.getElementById('passInput').addEventListener('keypress', (e) => { 
+        if (e.key === 'Enter') checkPassword(); 
+    });
 </script>
 </body>
 </html>

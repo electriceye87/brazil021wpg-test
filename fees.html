@@ -1,86 +1,209 @@
-<style>
-    /* Add this to your existing CSS */
-    .fee-section { margin-bottom: 60px; }
-    .section-title { 
-        text-align: left; 
-        border-left: 5px solid var(--brazil-green); 
-        padding-left: 15px; 
-        margin-bottom: 25px; 
-        color: var(--brazil-blue);
-    }
-    .pricing-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 25px;
-    }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership & Fees | Brazil 021 Winnipeg</title>
+    <style>
+        /* BRANDING - MATCHING INDEX.HTML */
+        :root {
+            --brazil-green: #009739;
+            --brazil-yellow: #fed100;
+            --brazil-blue: #002776;
+            --text-dark: #333;
+            --light-bg: #f4f4f4;
+        }
 
-<div class="container">
-    <h1>Membership & Fees</h1>
-    <p class="subtitle">Select the program that best fits your training goals.</p>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
 
-    <div class="fee-section">
-        <h2 class="section-title">Monthly Memberships</h2>
-        <div class="pricing-grid">
-            <div class="price-card">
-                <div class="tier-name">Individual Adult</div>
-                <div class="price">$90<span>/mo</span></div>
-                <ul class="features">
-                    <li>Unlimited Adult/Teen Classes</li>
-                    <li>No long-term contracts</li>
-                </ul>
-                <a href="#LINK_1" class="pay-btn">Subscribe Online</a>
-            </div>
-            <div class="price-card featured">
-                <div class="featured-tag">Best Value</div>
-                <div class="tier-name">Family (2 Members)</div>
-                <div class="price">$135<span>/mo</span></div>
-                <ul class="features">
-                    <li>Covers 2 immediate family members</li>
-                    <li>Additional members: $22.50/ea</li>
-                </ul>
-                <a href="#LINK_2" class="pay-btn featured-btn">Subscribe Online</a>
-            </div>
+        /* NAVIGATION - MATCHING INDEX.HTML */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5%;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo-text img { height: 85px; } /* Large logo as requested */
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            margin-left: 20px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        /* PAGE CONTENT */
+        .container { max-width: 1200px; margin: 50px auto; padding: 0 20px; text-align: center; }
+        h1 { color: var(--brazil-blue); font-size: 2.5rem; margin-bottom: 10px; }
+        .subtitle { color: #666; margin-bottom: 50px; }
+
+        .fee-section { margin-bottom: 70px; text-align: left; }
+        .section-title { 
+            border-left: 6px solid var(--brazil-green); 
+            padding-left: 15px; 
+            margin-bottom: 30px; 
+            color: var(--brazil-blue);
+            font-size: 1.8rem;
+        }
+
+        /* PRICING GRID */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .price-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+        }
+        .price-card:hover { transform: translateY(-5px); border-color: var(--brazil-green); }
+        
+        .price-card.featured { border: 2px solid var(--brazil-green); position: relative; }
+        .featured-tag { 
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            background: var(--brazil-green); color: white; padding: 4px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;
+        }
+
+        .tier-name { font-size: 1.2rem; font-weight: bold; color: var(--brazil-blue); margin-bottom: 10px; }
+        .price { font-size: 2.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 15px; }
+        .price span { font-size: 1rem; color: #888; }
+        
+        .features { list-style: none; margin-bottom: 25px; flex-grow: 1; font-size: 0.95rem; }
+        .features li { margin-bottom: 10px; color: #555; }
+        .features li::before { content: "✓"; color: var(--brazil-green); font-weight: bold; margin-right: 10px; }
+
+        /* BUTTONS - MATCHING THE HERO BUTTON STYLE */
+        .pay-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            background: var(--brazil-yellow);
+            color: var(--brazil-blue);
+            transition: 0.3s;
+        }
+        .pay-btn:hover { background: var(--brazil-green); color: white; }
+
+        /* FOOTER - MATCHING INDEX.HTML */
+        footer { background: var(--brazil-blue); color: white; padding: 40px 5%; text-align: center; margin-top: 50px; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Consider adding your hamburger menu here later */
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-text"><a href="index.html"><img src="logo.webp" alt="Brazil 021 Logo"></a></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="fees.html">Membership</a>
+            <a href="index.html#contact">Contact</a>
         </div>
-    </div>
+    </nav>
 
-    <div class="fee-section">
-        <h2 class="section-title">Visitors & Drop-ins</h2>
-        <div class="pricing-grid">
-            <div class="price-card">
-                <div class="tier-name">Single Session</div>
-                <div class="price">$15<span>/class</span></div>
-                <ul class="features">
-                    <li>Perfect for out-of-town visitors</li>
-                    <li>Valid for any scheduled class</li>
-                </ul>
-                <a href="#LINK_3" class="pay-btn">Purchase Pass</a>
-            </div>
-            <div class="price-card">
-                <div class="tier-name">10-Class Punch Card</div>
-                <div class="price">$130<span>/total</span></div>
-                <ul class="features">
-                    <li>Savings of $20</li>
-                    <li>No expiry date</li>
-                </ul>
-                <a href="#LINK_4" class="pay-btn">Purchase Card</a>
-            </div>
-        </div>
-    </div>
+    <div class="container">
+        <h1>Membership & Fees</h1>
+        <p class="subtitle">Winnipeg's Premier BJJ Academy Branding & Pricing</p>
 
-    <div class="fee-section">
-        <h2 class="section-title">Private Instruction</h2>
-        <div class="pricing-grid">
-            <div class="price-card" style="grid-column: 1 / -1; display: flex; flex-wrap: wrap; text-align: left; align-items: center;">
-                <div style="flex: 1; padding-right: 20px;">
-                    <div class="tier-name">One-on-One Training</div>
-                    <p>Tailored instruction to accelerate your progress and fix technical gaps.</p>
+        <div class="fee-section">
+            <h2 class="section-title">Monthly Memberships</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <div class="tier-name">Individual</div>
+                    <div class="price">$90<span>/mo</span></div>
+                    <ul class="features">
+                        <li>Unlimited Adult/Teen Classes</li>
+                        <li>No Registration Fees</li>
+                    </ul>
+                    <a href="#LINK" class="pay-btn">Subscribe</a>
                 </div>
-                <div style="text-align: center; min-width: 200px;">
+                <div class="price-card">
+                    <div class="tier-name">Family (2)</div>
+                    <div class="price">$135<span>/mo</span></div>
+                    <ul class="features">
+                        <li>Covers 2 Family Members</li>
+                        <li>50% Off 2nd Member</li>
+                    </ul>
+                    <a href="#LINK" class="pay-btn">Subscribe</a>
+                </div>
+                <div class="price-card featured">
+                    <div class="featured-tag">Value</div>
+                    <div class="tier-name">Family (3)</div>
+                    <div class="price">$157.50<span>/mo</span></div>
+                    <ul class="features">
+                        <li>Covers 3 Family Members</li>
+                        <li>75% Off 3rd Member</li>
+                    </ul>
+                    <a href="#LINK" class="pay-btn">Subscribe</a>
+                </div>
+                <div class="price-card">
+                    <div class="tier-name">Family (4)</div>
+                    <div class="price">$180<span>/mo</span></div>
+                    <ul class="features">
+                        <li>Covers 4 Family Members</li>
+                        <li>Maximum Savings</li>
+                    </ul>
+                    <a href="#LINK" class="pay-btn">Subscribe</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="fee-section">
+            <h2 class="section-title">Drop-ins</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <div class="tier-name">Single Session</div>
+                    <div class="price">$15<span>/class</span></div>
+                    <a href="#LINK" class="pay-btn">Buy Pass</a>
+                </div>
+                <div class="price-card">
+                    <div class="tier-name">10-Class Card</div>
+                    <div class="price">$130<span>/total</span></div>
+                    <a href="#LINK" class="pay-btn">Buy Card</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="fee-section">
+            <h2 class="section-title">Private Instruction</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <div class="tier-name">1-on-1 Private</div>
                     <div class="price">$70<span>/hr</span></div>
-                    <a href="#LINK_5" class="pay-btn" style="background: var(--brazil-blue); color: white; border: none;">Book a Session</a>
+                    <a href="#LINK" class="pay-btn">Book Now</a>
+                </div>
+                <div class="price-card">
+                    <div class="tier-name">Semi-Private (2)</div>
+                    <div class="price">$100<span>/hr</span></div>
+                    <a href="#LINK" class="pay-btn">Book Now</a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <footer>
+        <p>&copy; 2024 Brazil 021 Winnipeg. <a href="index.html" style="color: white; margin-left: 10px;">Back to Home</a></p>
+    </footer>
+
+</body>
+</html>

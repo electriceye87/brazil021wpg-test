@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership & Fees | Brazil 021 Winnipeg</title>
+    <style>
+        :root {
+            --brazil-green: #009739;
+            --brazil-yellow: #fed100;
+            --brazil-blue: #002776;
+            --text-dark: #333;
+            --light-bg: #f9f9f9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+        /* HEADER / NAV (Matching your Index) */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5%;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logo-img { height: 60px; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); margin-left: 20px; font-weight: 600; }
+
+        /* PAGE CONTENT */
+        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; text-align: center; }
+        
+        h1 { color: var(--brazil-blue); font-size: 2.5rem; margin-bottom: 10px; }
+        .subtitle { color: #666; margin-bottom: 40px; }
+
+        /* PRICING GRID */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .price-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
+        .price-card:hover { transform: translateY(-10px); border-color: var(--brazil-green); }
+        
+        .price-card.featured { border: 2px solid var(--brazil-green); position: relative; }
+        .featured-tag { 
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: var(--brazil-green); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem;
+        }
+
+        .tier-name { font-size: 1.2rem; font-weight: bold; color: var(--brazil-blue); margin-bottom: 15px; }
+        .price { font-size: 2.5rem; font-weight: 800; color: var(--text-dark); }
+        .price span { font-size: 1rem; color: #888; }
+        
+        .features { list-style: none; margin: 25px 0; text-align: left; }
+        .features li { margin-bottom: 12px; color: #555; }
+        .features li::before { content: "✓"; color: var(--brazil-green); font-weight: bold; margin-right: 10px; }
+
+        /* PAYMENT INFO SECTION */
+        .payment-info {
+            background: var(--light-bg);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: left;
+            margin-top: 40px;
+        }
+        .payment-info h3 { color: var(--brazil-blue); margin-bottom: 15px; }
+        .payment-method { margin-bottom: 20px; display: flex; align-items: flex-start; gap: 15px; }
+        .icon-box { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-size: 1.2rem; }
+
+        /* FOOTER */
+        footer { background: var(--brazil-blue); color: white; padding: 40px 5%; text-align: center; margin-top: 50px; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-text"><a href="index.html"><img src="logo.webp" alt="Brazil 021 Logo" class="logo-img"></a></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="fees.html" style="color: var(--brazil-green);">Membership</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Membership & Fees</h1>
+        <p class="subtitle">No long-term contracts. Just world-class Brazilian Jiu-Jitsu.</p>
+
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="tier-name">Individual BJJ</div>
+                <div class="price">$90<span>/month</span></div>
+                <ul class="features">
+                    <li>Full access to fundamentals</li>
+                    <li>Adult/Teen curriculum</li>
+                    <li>No registration fees</li>
+                </ul>
+            </div>
+
+            <div class="price-card featured">
+                <div class="featured-tag">Most Popular</div>
+                <div class="tier-name">Family Membership</div>
+                <div class="price">$135<span>/month</span></div>
+                <p style="font-size: 0.8rem; color: #888;">Covers 2 Family Members</p>
+                <ul class="features">
+                    <li>Additional members only $22.50</li>
+                    <li>50% off 2nd member</li>
+                    <li>75% off 3rd+ members</li>
+                </ul>
+            </div>
+
+            <div class="price-card">
+                <div class="tier-name">Drop-In / Single</div>
+                <div class="price">$15<span>/class</span></div>
+                <ul class="features">
+                    <li>Visiting students welcome</li>
+                    <li>One-time training pass</li>
+                    <li>Great for testing a class</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="payment-info">
+            <h3>Accepted Payment Methods</h3>
+            <div class="payment-method">
+                <div class="icon-box">💵</div>
+                <div>
+                    <strong>Cash & E-Transfer</strong><br>
+                    Payments via e-transfer to <strong>brazil021wpg@gmail.com</strong>. (No additional fees)
+                </div>
+            </div>
+            <div class="payment-method">
+                <div class="icon-box">💳</div>
+                <div>
+                    <strong>Debit & Credit Cards</strong><br>
+                    Payments can be made on-site. (Transaction fees apply for card payments)
+                </div>
+            </div>
+            <p style="color: #888; font-size: 0.85rem; border-top: 1px solid #ddd; padding-top: 20px;">
+                Note: Transaction fees apply when paying online or by card on-site. Fees are waived for cash or e-transfer.
+            </p>
+        </div>
+<div class="private-lessons" style="margin-top: 60px; padding: 40px; border: 2px dashed #ddd; border-radius: 15px; background: white;">
+    <div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: center;">
+        <div style="flex: 1; min-width: 300px; text-align: left;">
+            <h2 style="color: var(--brazil-blue); margin-bottom: 15px;">Private One-on-One Training</h2>
+            <p style="color: #555; line-height: 1.6; margin-bottom: 20px;">
+                Accelerate your learning with personalized instruction. Private lessons are the most efficient way to refine your technique, troubleshoot specific positions, and develop a "game plan" tailored to your body type.
+            </p>
+            <ul style="list-style: none; margin-bottom: 25px;">
+                <li style="margin-bottom: 10px;"><strong>🎯 Personalized Curriculum:</strong> Focus only on what you need.</li>
+                <li style="margin-bottom: 10px;"><strong>⏰ Flexible Scheduling:</strong> Train at times that fit your busy life.</li>
+                <li style="margin-bottom: 10px;"><strong>📈 Faster Progression:</strong> Fix bad habits in real-time.</li>
+            </ul>
+        </div>
+        
+        <div style="flex: 0.8; min-width: 280px; background: var(--light-bg); padding: 30px; border-radius: 12px; text-align: center;">
+            <div style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--brazil-green); font-weight: bold; margin-bottom: 10px;">Investment</div>
+            <div style="font-size: 3rem; font-weight: 800; color: var(--text-dark);">$70<span style="font-size: 1rem; color: #888;">/hour</span></div>
+            <p style="margin: 15px 0; color: #666;">Discounted packages available for 5 or 10 sessions.</p>
+            <a href="index.html#contact" style="display: block; background: var(--brazil-blue); color: white; padding: 12px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-top: 20px;">Inquire About Availability</a>
+        </div>
+    </div>
+</div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Brazil 021 Winnipeg. <a href="index.html" style="color: white;">Back to Home</a></p>
+    </footer>
+
+</body>
+</html>

@@ -211,13 +211,14 @@
         document.getElementById(id).innerHTML = html;
     }
 
-    function renderNewsletters(data, id) {
-        let html = '';
-        data.forEach(item => {
-            html += `<div class="newsletter-item"><span>${item.name}</span><a href="${item.link}" target="_blank">View PDF</a></div>`;
-        });
-        document.getElementById(id).innerHTML = html;
-    }
+   function renderNewsletters(data, id) {
+    let html = '';
+    data.forEach(item => {
+        // Added 📄 icon and a space before "View PDF"
+        html += `<div class="newsletter-item"><span>${item.name}</span><a href="${item.link}" target="_blank">📄 View PDF</a></div>`;
+    });
+    document.getElementById(id).innerHTML = html;
+}
 
     function renderVideos(data, id) {
         let html = '';

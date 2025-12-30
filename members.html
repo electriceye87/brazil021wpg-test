@@ -60,29 +60,55 @@
     .portal-section { background: white; border-radius: 12px; padding: 30px; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); scroll-margin-top: 120px; }
     .section-title { color: var(--brazil-green); border-left: 6px solid var(--brazil-yellow); padding-left: 15px; margin-bottom: 25px; font-size: 1.6rem; text-transform: uppercase; }
 
-    /* --- REFINED NEWSLETTER STYLES --- */
-    .newsletter-item { 
-        display: flex; 
-        justify-content: space-between; 
-        align-items: center; 
-        padding: 18px 0; 
-        border-bottom: 1px solid #eee; 
+  /* --- REFINED NEWSLETTER STYLES --- */
+.newsletter-item { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 20px 0; 
+    border-bottom: 1px solid #eee;
+    gap: 15px; /* Ensures text and button never touch */
+}
+
+.newsletter-item span { 
+    font-weight: 600; 
+    color: var(--brazil-green); 
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.newsletter-item a { 
+    background: var(--brazil-yellow); 
+    color: var(--brazil-green); 
+    padding: 10px 18px; 
+    border-radius: 6px; 
+    text-decoration: none; 
+    font-weight: 800; 
+    font-size: 0.75rem; 
+    text-transform: uppercase;
+    transition: 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    white-space: nowrap; /* Prevents button text from wrapping */
+    min-width: fit-content;
+}
+
+.newsletter-item a:hover { 
+    background: #f0cc2d; 
+    transform: translateY(-1px); 
+}
+
+/* Mobile tweak to stack if name is too long */
+@media (max-width: 480px) {
+    .newsletter-item {
+        flex-direction: column;
+        align-items: flex-start;
     }
-    .newsletter-item span { font-weight: 600; color: var(--brazil-green); font-size: 1rem; }
-    .newsletter-item a { 
-        background: var(--brazil-yellow); 
-        color: var(--brazil-green); 
-        padding: 10px 20px; 
-        border-radius: 6px; 
-        text-decoration: none; 
-        font-weight: 800; 
-        font-size: 0.75rem; 
-        text-transform: uppercase;
-        transition: 0.2s ease;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        white-space: nowrap;
+    .newsletter-item a {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
     }
-    .newsletter-item a:hover { background: #f0cc2d; transform: translateY(-1px); }
+}
 
     /* --- VIDEO DASHBOARD --- */
     .video-controls { margin-bottom: 30px; background: #f9f9f9; padding: 20px; border-radius: 10px; }

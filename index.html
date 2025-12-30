@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brazil-021 Winnipeg - Official Site</title>
     <style>
-        /* --- BRAND COLORS EXTRACTED FROM LOGO --- */
+        /* --- BRAND COLORS --- */
         :root {
-            --brazil-green: #2d5f42;   /* The Deep Forest Green from the ring */
-            --brazil-yellow: #fdd835;  /* The Bright Yellow from the text */
-            --brazil-blue: #5d76a0;    /* The Slate Blue from the water */
-            --text-dark: #1a1a1a;      /* Almost Black for readability */
-            --bg-light: #f4f6f5;       /* Very subtle green-grey tint */
+            --brazil-green: #2d5f42;
+            --brazil-yellow: #fdd835;
+            --brazil-blue: #5d76a0;
+            --text-dark: #1a1a1a;
+            --bg-light: #f4f6f5;
             --white: #ffffff;
         }
         
@@ -24,48 +24,96 @@
         nav {
             display: flex; justify-content: space-between; align-items: center;
             padding: 1rem 5%; background: var(--white);
-            border-bottom: 4px solid var(--brazil-green); /* Branding Line */
+            border-bottom: 4px solid var(--brazil-green);
             position: sticky; top: 0; z-index: 100;
+            height: 90px;
         }
-        /* Placeholder for where the image logo would go */
-        .logo-text { font-weight: 900; font-size: 1.5rem; color: var(--brazil-green); letter-spacing: -1px; display: flex; align-items: center; gap: 10px; }
+        .logo-text img { height: 70px; }
         
-        .nav-links a { text-decoration: none; color: var(--text-dark); margin-left: 25px; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+        .nav-links { display: flex; align-items: center; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
         .nav-links a:hover { color: var(--brazil-green); }
-        .nav-cta {
-            background-color: var(--brazil-green); color: var(--white) !important;
-            padding: 10px 24px; border-radius: 4px; transition: 0.3s;
+        
+        /* LOGIN BUTTON STYLE */
+        .nav-links .login-btn {
+            background-color: var(--brazil-yellow);
+            color: var(--brazil-green) !important;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .nav-cta:hover { background-color: #1e402c; } /* Darker green on hover */
+        .nav-links .login-btn:hover {
+            background-color: #f0cc2d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        /* --- MOBILE MENU STYLES --- */
+        .hamburger { 
+            display: none; 
+            flex-direction: column; 
+            gap: 6px; 
+            cursor: pointer; 
+            background: none; 
+            border: none; 
+            padding: 10px; 
+            z-index: 2001; 
+        }
+        .hamburger span { 
+            display: block; width: 30px; height: 3px; 
+            background-color: var(--brazil-green); 
+            border-radius: 3px; 
+        }
+
+        .close-btn { display: none; } /* Hidden on Desktop */
+
+        @media (max-width: 900px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                display: none; 
+                position: fixed; top: 0; right: 0; width: 100%; height: 100vh;
+                background: var(--brazil-green); 
+                flex-direction: column; justify-content: center; align-items: center;
+                z-index: 2000; gap: 25px;
+            }
+            .nav-links.open { display: flex; }
+            
+            .nav-links a { 
+                color: white !important; font-size: 1.5rem !important; 
+                font-weight: bold; text-transform: uppercase; margin: 0;
+            }
+            
+            .nav-links .login-btn {
+                background: none !important; box-shadow: none !important; padding: 0 !important;
+                color: var(--brazil-yellow) !important;
+            }
+
+            .close-btn { 
+                display: block !important; color: white; font-weight: bold; 
+                margin-bottom: 40px; cursor: pointer; font-size: 1rem; 
+                text-transform: uppercase; letter-spacing: 2px;
+                border: 1px solid rgba(255,255,255,0.4); padding: 10px 25px; border-radius: 5px;
+            }
+        }
         
     /* --- HERO SECTION --- */
         .hero {
-            /* 1. The dark green overlay. 2. The image file name. */
             background: linear-gradient(rgba(45, 95, 66, 0.65), rgba(30, 64, 44, 0.65)), url('hero-bg.jpg');
-            
-            /* Make sure the image covers the screen */
             background-size: cover;
-            
-            /* CHANGE: Anchor to the TOP so heads aren't cut off */
             background-position: center 40%;
-            
             background-repeat: no-repeat;
-            
             color: var(--white);
             padding: 5rem 5%;
             text-align: center;
             position: relative;
-            overflow: hidden;
         }
-        /* The yellow line at the bottom */
         .hero::after {
             content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 8px; background: var(--brazil-yellow);
         }
-
         .hero h1 { font-size: 3rem; line-height: 1.1; margin-bottom: 1.5rem; font-weight: 800; }
         .hero p { font-size: 1.2rem; color: #e2e8f0; max-width: 650px; margin: 0 auto 2.5rem auto; }
         
-        /* The High Contrast Button */
         .hero-btn {
             display: inline-block; background-color: var(--brazil-yellow); color: var(--text-dark);
             padding: 16px 40px; border-radius: 50px; text-decoration: none;
@@ -87,317 +135,196 @@
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); border-bottom: 4px solid transparent; transition: 0.3s;
         }
         .card:hover { border-bottom: 4px solid var(--brazil-green); transform: translateY(-5px); }
-        
         .icon-box { 
             width: 50px; height: 50px; background: var(--bg-light); border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;
-            font-size: 1.5rem;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.5rem;
         }
-        
         .card h3 { color: var(--brazil-green); margin-bottom: 1rem; font-size: 1.3rem; }
         .card p { font-size: 1rem; color: #555; line-height: 1.6; }
 
-        /* --- INSTRUCTOR HIGHLIGHT (New Section) --- */
+        /* --- INSTRUCTOR HIGHLIGHT --- */
         .instructor-highlight {
             padding: 5rem 5%; background: var(--white); display: flex; align-items: center; gap: 4rem; flex-wrap: wrap;
         }
         .instructor-text { flex: 1; min-width: 300px; }
         .instructor-text h2 { color: var(--brazil-green); font-size: 2.2rem; margin-bottom: 1rem; }
-        .instructor-visual { 
-            flex: 1; min-width: 300px; height: 300px; background-color: var(--brazil-blue); 
-            border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white;
-            /* In real site, this would be a photo of Hannette Staack */
-        }
 
-    /* --- VISUAL BELT SYSTEM (Corrected) --- */
+        /* --- INSTRUCTOR GRID --- */
+        .instructor-grid {
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; padding: 2rem 5% 4rem 5%;
+        }
+        .instructor-card {
+            display: flex; align-items: center; background: #fff; padding: 1.5rem;
+            border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            width: 100%; max-width: 500px; cursor: pointer; transition: transform 0.2s; border: 1px solid #eee;
+        }
+        .instructor-card:hover { transform: translateY(-3px); border-color: var(--brazil-green); }
+        .card-visual {
+            display: flex; flex-direction: column; align-items: center; margin-right: 1.5rem; min-width: 110px;
+        }
+        .card-visual img {
+            width: 110px; height: 110px; object-fit: cover; border-radius: 50%; border: 3px solid var(--brazil-green); margin-bottom: 8px;
+        }
         .belt-display {
-            height: 24px;
-            width: 100%;
-            max-width: 140px;
-            margin: 0.5rem auto;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            display: flex;
-            justify-content: flex-end; /* Push bar to the right */
-            overflow: hidden;
+            height: 18px; width: 100%; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            display: flex; justify-content: flex-end; overflow: hidden;
         }
-
-        /* Belt Strap Colors */
         .belt-black  { background-color: #1a1a1a; border: 1px solid #333; }
         .belt-brown  { background-color: #5d4037; }
         .belt-purple { background-color: #7b1fa2; }
         .belt-blue   { background-color: #1565c0; }
-        .belt-white  { background-color: #f5f5f5; border: 1px solid #ddd; }
+        .rank-tab { width: 40px; height: 100%; background-color: #000; display: flex; justify-content: space-evenly; align-items: center; border-left: 1px solid rgba(255,255,255,0.2); }
+        .belt-black .rank-tab { background-color: #d32f2f; }
+        .stripe { width: 4px; height: 100%; background-color: rgba(255,255,255,0.95); display: block; }
+        .card-info h4 { font-size: 1.4rem; color: var(--brazil-green); margin-bottom: 0.2rem; line-height: 1.2; }
 
-        /* The Rank Bar (Default = BLACK for colored belts) */
-        .rank-tab {
-            width: 40px;
-            height: 100%;
-            background-color: #000; /* Black bar is default */
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            border-left: 1px solid rgba(255,255,255,0.2);
-        }
-
-        /* OVERRIDE: If it's a Black Belt, make the bar RED */
-        .belt-black .rank-tab {
-            background-color: #d32f2f;
-        }
-        
-        /* The White Stripes */
-        .stripe {
-            width: 4px;
-            height: 100%;
-            background-color: rgba(255,255,255,0.95);
-            display: block;
-        }
-
-    /* --- HORIZONTAL INSTRUCTOR CARDS --- */
-        .instructor-grid {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            padding: 2rem 5% 4rem 5%;
-        }
-
-        .instructor-card {
-            display: flex;            /* Makes it side-by-side */
-            align-items: center;        /* Vertically centers the text */
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            width: 100%;
-            max-width: 500px;           /* Wider card to fit name */
-            cursor: pointer;
-            transition: transform 0.2s;
-            border: 1px solid #eee;
-        }
-        .instructor-card:hover { transform: translateY(-3px); border-color: var(--brazil-green); }
-
-        /* Left Column: Image + Belt */
-        .card-visual {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-right: 1.5rem;       /* Space between image and name */
-            min-width: 110px;           /* Ensures column doesn't shrink */
-        }
-        .card-visual img {
-            width: 110px; height: 110px; 
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid var(--brazil-green);
-            margin-bottom: 8px;         /* Space between Face and Belt */
-        }
-
-        /* The Belt Bar (Adjusted size for this layout) */
-        .belt-display {
-            height: 18px;               /* Slightly thinner for elegance */
-            width: 100%;
-            border-radius: 4px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-            display: flex; justify-content: flex-end; overflow: hidden;
-        }
-        /* (Keep your existing belt colors: .belt-black, .rank-tab, etc.) */
-
-        /* Right Column: Text */
-        .card-info { text-align: left; }
-        .card-info h4 {
-            font-size: 1.4rem;          /* Larger Name */
-            color: var(--brazil-green);
-            margin-bottom: 0.2rem;
-            line-height: 1.2;
-        }
-        .card-info p { font-size: 0.95rem; color: #666; }
+        /* --- CONTACT SECTION --- */
+        .contact-section { background: var(--brazil-green); color: var(--white); padding: 4rem 5%; text-align: center; }
+        .contact-form { max-width: 500px; margin: 2rem auto 0 auto; display: flex; flex-direction: column; gap: 15px; }
+        .form-input { padding: 15px; border-radius: 8px; border: none; font-size: 1rem; width: 100%; }
+        .form-btn { background-color: var(--brazil-yellow); color: var(--text-dark); padding: 15px; border-radius: 8px; border: none; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: 0.2s; margin-top: 10px; }
+        .form-btn:hover { background-color: #fff176; transform: translateY(-2px); }
 
         /* --- FOOTER --- */
         footer { background: var(--brazil-green); color: white; padding: 4rem 5%; text-align: center; }
         footer a { color: var(--brazil-yellow); text-decoration: none; font-weight: bold; }
 
-        /* --- MOBILE TWEAKS --- */
-        @media (max-width: 768px) {
-            .nav-links { display: none; } 
-            .hero h1 { font-size: 2.2rem; }
-            .instructor-highlight { flex-direction: column-reverse; }
-        }
-
-        /* --- [FIXED] CONTACT CSS --- */
-        .contact-section { 
-            background: var(--brazil-green); 
-            color: var(--white); 
-            padding: 4rem 5%; 
-            text-align: center; 
-        }
-        .contact-form { 
-            max-width: 500px; 
-            margin: 2rem auto 0 auto; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 15px; 
-        }
-        .form-input { 
-            padding: 15px; 
-            border-radius: 8px; 
-            border: none; 
-            font-size: 1rem; 
-            width: 100%; 
-            font-family: inherit;
-        }
-        .form-btn { 
-            background-color: var(--brazil-yellow); 
-            color: var(--text-dark);
-            padding: 15px; 
-            border-radius: 8px; 
-            border: none; 
-            font-weight: 800; 
-            font-size: 1.1rem; 
-            cursor: pointer; 
-            transition: 0.2s;
-            margin-top: 10px;
-        }
-        .form-btn:hover { background-color: #fff176; transform: translateY(-2px); }
-
-        /* --- [FIXED] MODAL (POPUP) CSS --- */
-        /* This was missing in your paste, which is why the popups didn't work */
+        /* --- MODAL (POPUP) --- */
         .bio-modal {
-            display: none; /* Hidden by default */
-            position: fixed; z-index: 2000; 
-            left: 0; top: 0; width: 100%; height: 100%; 
-            overflow: auto; 
-            background-color: rgba(0,0,0,0.8); 
-            backdrop-filter: blur(5px);
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+            overflow: auto; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
         }
         .modal-content {
-            background-color: #fff;
-            margin: 15% auto; 
-            padding: 2rem;
-            border: 1px solid #888;
-            width: 90%; max-width: 500px;
-            border-radius: 12px;
-            position: relative;
-            text-align: left;
+            background-color: #fff; margin: 15% auto; padding: 2rem; border: 1px solid #888;
+            width: 90%; max-width: 500px; border-radius: 12px; position: relative; text-align: left;
         }
         .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
         .close-btn:hover { color: #000; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .instructor-highlight { flex-direction: column-reverse; }
+        }
     </style>
 </head>
 <body>
 
-    <nav>
+<nav>
     <div class="logo-text">
-    <img src="logo.webp" alt="Brazil-021 Logo" style="height: 95px;">
+        <a href="index.html"><img src="logo.webp" alt="Logo"></a>
     </div>
-        <div class="nav-links">
-            <a href="#classes">Classes</a>
-            <a href="#instructors">Instructors</a>
-            <a href="#schedule">Schedule</a>
-            <a href="fees.html">Membership and Fees</a>
-            <a href="members.html">Login</a>
-            <a href="#contact" class="nav-cta">Start Free Trial</a>
-        </div>
-    </nav>
 
-    <section class="hero">
-        <h1>World Class Jiu-Jitsu.<br>Right Here in Winnipeg.</h1>
-        <p>Train with confidence under female-led black belts. A safe, structured, and ego-free environment for you and your family.</p>
-        <a href="#contact" class="hero-btn" style="margin-top: 30px; display: inline-block;">Book Your Free Class</a>
-        <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.9;">
-            <span style="color: var(--brazil-yellow);">✓</span> No Long-Term Contracts    
-            <span style="color: var(--brazil-yellow);">✓</span> Beginner Friendly
+    <button class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+        <span class="close-btn" onclick="toggleMenu()">✕ CLOSE</span>
+        <a href="#classes" onclick="toggleMenu()">Classes</a>
+        <a href="#instructors" onclick="toggleMenu()">Instructors</a>
+        <a href="#schedule" onclick="toggleMenu()">Schedule</a>
+        <a href="fees.html">Membership and Fees</a>
+        <a href="#contact" onclick="toggleMenu()">Contact</a>
+        <a href="members.html" class="login-btn">Login</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <h1>World Class Jiu-Jitsu.<br>Right Here in Winnipeg.</h1>
+    <p>Train with confidence under female-led black belts. A safe, structured, and ego-free environment for you and your family.</p>
+    <a href="#contact" class="hero-btn" style="margin-top: 30px; display: inline-block;">Book Your Free Class</a>
+    <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.9;">
+        <span style="color: var(--brazil-yellow);">✓</span> No Long-Term Contracts &nbsp;&nbsp;
+        <span style="color: var(--brazil-yellow);">✓</span> Beginner Friendly
+    </p>
+</section>
+
+<section id="classes" class="features">
+    <div class="section-header">
+        <h2>The Brazil-021 Difference</h2>
+        <p>Why we are Winnipeg's choice for authentic BJJ.</p>
+    </div>
+    <div class="grid">
+        <div class="card">
+            <div class="icon-box">🥋</div>
+            <h3>Expert Leadership</h3>
+            <p>Learn directly from highly decorated female black belts who prioritize technique over brute strength. Perfect for smaller practitioners.</p>
+        </div>
+        <div class="card">
+            <div class="icon-box">🛡️</div>
+            <h3>Self-Defense First</h3>
+            <p>We teach the original intent of Jiu-Jitsu: Self-Defense. Learn to stay safe in real-world scenarios, not just competition rules.</p>
+        </div>
+        <div class="card">
+            <div class="icon-box">🤝</div>
+            <h3>Community Focused</h3>
+            <p>Join a "Little Tatankas" kids class or an adult fundamentals session. We build confidence and character on and off the mats.</p>
+        </div>
+    </div>
+</section>
+
+<section id="programs" style="padding: 4rem 5%; background-color: #f8fafc;">
+    <div class="section-header">
+        <h2>Our Programs</h2>
+        <p>Brazilian Jiu-Jitsu for every age and goal. Click a card for details.</p>
+    </div>
+
+    <div class="instructor-grid" style="padding-top: 0; padding-bottom: 2rem;">
+        
+        <div class="instructor-card" onclick="openBio('class-adults')">
+            <div class="card-visual">
+                <img src="logo.webp" alt="Adults Class" style="border-radius: 8px; border: none; width: 110px; height: 110px; object-fit: cover;">
+            </div>
+            <div class="card-info">
+                <h4 style="margin-bottom: 0.5rem;">Adults & Teens</h4>
+                <p style="font-weight: bold; color: var(--text-dark); margin-bottom: 0.5rem;">Fundamentals • Advanced</p>
+                <p style="font-size: 0.9rem; color: #666;">
+                    Self-defense, fitness, and sparring for all levels.
+                    <br>
+                    <span style="color: var(--brazil-green); font-weight: bold;">Click to read more »</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="instructor-card" onclick="openBio('class-kids')">
+            <div class="card-visual">
+                <img src="logo.webp" alt="Kids Class" style="border-radius: 8px; border: none; width: 110px; height: 110px; object-fit: cover;">
+            </div>
+            <div class="card-info">
+                <h4 style="margin-bottom: 0.5rem;">Kids & Youth</h4>
+                <p style="font-weight: bold; color: var(--text-dark); margin-bottom: 0.5rem;">Ages 4-7 • Ages 8-12</p>
+                <p style="font-size: 0.9rem; color: #666;">
+                    Bully-proof confidence, discipline, and fun games.
+                    <br>
+                    <span style="color: var(--brazil-green); font-weight: bold;">Click to read more »</span>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="instructors" class="instructor-highlight" style="align-items: center;">
+    <img src="Christina.jpg" alt="Professor Christina Competing" style="flex: 1; max-width: 450px; width: 100%; height: auto; border-radius: 12px; border: 4px solid var(--brazil-green); box-shadow: 0 10px 20px rgba(0,0,0,0.15);">
+    <div class="instructor-text" style="padding-left: 2rem;">
+        <h2 style="color: var(--brazil-green); line-height: 1.2; margin-bottom: 1rem;">Led by Professor Christina Barry</h2>
+        <p style="margin-bottom: 1.5rem; font-size: 1.05rem; color: #444;">
+            Active competitor and one of the few female Black Belt academy owners in the region. Professor Christina leads by example, proving that technique triumphs over size and strength.
         </p>
-    </section>
+        <p style="font-style: italic; color: #555; border-left: 4px solid var(--brazil-yellow); padding-left: 15px;">
+            "We don't just teach you how to fight. We teach you how to believe in yourself."
+        </p>
+    </div>
+</section>
 
-    <section id="classes" class="features">
-        <div class="section-header">
-            <h2>The Brazil-021 Difference</h2>
-            <p>Why we are Winnipeg's choice for authentic BJJ.</p>
-        </div>
-        <div class="grid">
-            <div class="card">
-                <div class="icon-box">🥋</div>
-                <h3>Expert Leadership</h3>
-                <p>Learn directly from highly decorated female black belts who prioritize technique over brute strength. Perfect for smaller practitioners.</p>
-            </div>
-            <div class="card">
-                <div class="icon-box">🛡️</div>
-                <h3>Self-Defense First</h3>
-                <p>We teach the original intent of Jiu-Jitsu: Self-Defense. Learn to stay safe in real-world scenarios, not just competition rules.</p>
-            </div>
-            <div class="card">
-                <div class="icon-box">🤝</div>
-                <h3>Community Focused</h3>
-                <p>Join a "Little Tatankas" kids class or an adult fundamentals session. We build confidence and character on and off the mats.</p>
-            </div>
-        </div>
-    </section>
+<section>
+    <div style="text-align: center; margin-top: 3rem; margin-bottom: 1rem;">
+        <h3 style="color: #666; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;">Meet the Coaching Staff</h3>
+    </div>
 
-<section id="classes" style="padding: 4rem 5%; background-color: #f8fafc;">
-        <div class="section-header">
-            <h2>Our Programs</h2>
-            <p>Brazilian Jiu-Jitsu for every age and goal. Click a card for details.</p>
-        </div>
-
-        <div class="instructor-grid" style="padding-top: 0; padding-bottom: 2rem;">
-            
-            <div class="instructor-card" onclick="openBio('class-adults')">
-                <div class="card-visual">
-                    <img src="logo.webp" alt="Adults Class" style="border-radius: 8px; border: none; width: 110px; height: 110px; object-fit: cover;">
-                </div>
-                <div class="card-info">
-                    <h4 style="margin-bottom: 0.5rem;">Adults & Teens</h4>
-                    <p style="font-weight: bold; color: var(--text-dark); margin-bottom: 0.5rem;">Fundamentals • Advanced</p>
-                    <p style="font-size: 0.9rem; color: #666;">
-                        Self-defense, fitness, and sparring for all levels.
-                        <br>
-                        <span style="color: var(--brazil-green); font-weight: bold;">Click to read more »</span>
-                    </p>
-                </div>
-            </div>
-
-            <div class="instructor-card" onclick="openBio('class-kids')">
-                <div class="card-visual">
-                    <img src="logo.webp" alt="Kids Class" style="border-radius: 8px; border: none; width: 110px; height: 110px; object-fit: cover;">
-                </div>
-                <div class="card-info">
-                    <h4 style="margin-bottom: 0.5rem;">Kids & Youth</h4>
-                    <p style="font-weight: bold; color: var(--text-dark); margin-bottom: 0.5rem;">Ages 4-7 • Ages 8-12</p>
-                    <p style="font-size: 0.9rem; color: #666;">
-                        Bully-proof confidence, discipline, and fun games.
-                        <br>
-                        <span style="color: var(--brazil-green); font-weight: bold;">Click to read more »</span>
-                    </p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="instructors" class="instructor-highlight" style="align-items: center;">
-        
-        <img src="Christina.jpg" alt="Professor Christina Competing" 
-             style="flex: 1; max-width: 450px; width: 100%; height: auto; border-radius: 12px; border: 4px solid var(--brazil-green); box-shadow: 0 10px 20px rgba(0,0,0,0.15);">
-        
-        <div class="instructor-text" style="padding-left: 2rem;">
-            <h2 style="color: var(--brazil-green); line-height: 1.2; margin-bottom: 1rem;">Led by Professor Christina Barry</h2>
-            <p style="margin-bottom: 1.5rem; font-size: 1.05rem; color: #444;">
-                Active competitor and one of the few female Black Belt academy owners in the region. Professor Christina leads by example, proving that technique triumphs over size and strength.
-            </p>
-            <p style="font-style: italic; color: #555; border-left: 4px solid var(--brazil-yellow); padding-left: 15px;">
-                "We don't just teach you how to fight. We teach you how to believe in yourself."
-            </p>
-        </div>
-    </section>
-
-    <section>
-        <div style="text-align: center; margin-top: 3rem; margin-bottom: 1rem;">
-            <h3 style="color: #666; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;">Meet the Coaching Staff</h3>
-        </div>
-
-       <div class="instructor-grid">
-        
+    <div class="instructor-grid">
         <div class="instructor-card" onclick="openBio('bio1')">
             <div class="card-visual">
                 <img src="christina-headshot.jpg" alt="Professor Christina">
@@ -445,215 +372,117 @@
             </div>
             <div class="card-info"><h4>Instructor Warren Kalyn</h4></div>
         </div>
-
-    </div> </section>
-
-    <div id="bio1" class="bio-modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeBio('bio1')">×</span>
-            <h2 style="color: var(--brazil-green);">Professor Christina Barry</h2>
-            <p>Professor Christina is a 3rd Degree Black Belt and the founder of Brazil021 Winnipeg. An IBJJF-certified instructor since 2012, she earned her rank under legendary world champions Hannette Staack and Misty Shearer. Christina combines high-level competitive success—including two bronze medals at the World Masters—with a deep passion for teaching. She specializes in women’s self-defense and empowerment, fostering a supportive environment where students build confidence and resilience. Whether your goal is competition or personal growth, Professor Christina is dedicated to helping you succeed on and off the mats.</p> </div>
     </div>
+</section>
 
- <div id="bio2" class="bio-modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeBio('bio2')">×</span>
-            <h2 style="color: var(--brazil-green);">Instructor Calias Cowieson</h2>
-            <p>Cal received his black belt June 17, 2023 and is a jiu-jitsu encyclopedia when it comes to jiu-jitsu technique and self-defense. When students have a question Cal always has an answer.</p> </div>
-    </div>
-
-<div id="bio3" class="bio-modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeBio('bio3')">×</span>
-            <h2 style="color: var(--brazil-green);">Instructor Jason McNamara</h2>
-            <p>Jason received his brown belt June 17, 2023.  He is a self-defense specialist and is a CanFitPro certified fitness trainer, which complements his martial arts training.</p> </div>
-    </div>
-
-<div id="bio4" class="bio-modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeBio('bio4')">×</span>
-            <h2 style="color: var(--brazil-green);">Instructor Rich Roberts</h2>
-            <p>Rich received his purple belt June 17, 2023 and is a highly energetic and enthusiastic instructor who is dedicated to helping students improve their jiu-jitsu skills.</p> </div>
-    </div>
-
-    <div id="bio5" class="bio-modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeBio('bio5')">×</span>
-            <h2 style="color: var(--brazil-green);">Instructor Quinton Sawatsky</h2>
-            <p>Quinton has been training jiu-jitsu for nearly 12 years. He earned his purple belt June 25, 2025 and has past competition experience with his favorite submissions being kimura and guillotine. He runs highly organized and fun kids classes and is a fantastic instructor for the teen/adult fundamentals class where he is able to really break-down techniques so students from all levels can understand the necessary details.</p>
-        </div>
-    </div>
-
-    <div id="bio6" class="bio-modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeBio('bio6')">×</span>
-            <h2 style="color: var(--brazil-green);">Instructor Warren Kalyn</h2>
-            <p>Warren has been training jiu-jitsu for over 3 years and is a blue belt with a ton of recent Gi and Nogi competition experience both in Canada and the US. He teaches both the kids and adult fundamentals class and is a detailed, patient and organized instructor who the students all enjoy working with and learning from.</p>
-        </div>
-    </div>
-    </section>
-    
-    <section id="schedule" style="padding: 4rem 5%; background-color: #f8fafc; text-align: center;">
-        <h2 style="color: var(--brazil-green); margin-bottom: 2rem;">Class Schedule</h2>
-        
-        <div style="max-width: 650px; margin: 0 auto; text-align: left;">
-            
-            <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 6px solid var(--brazil-green); box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                <h3 style="margin-bottom: 1rem; color: var(--text-dark); font-size: 1.4rem;">Wednesday</h3>
-                
-                <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eee;">
-                    <p style="color: var(--brazil-green); font-weight: bold; margin-bottom: 4px;">KIDS & YOUTH (Ages 4-12)</p>
-                    <p><strong>6:15 PM - 7:15 PM:</strong> Little Tatankas (4-7 yrs) / Kid Confident (8-12 yrs)</p>
-                </div>
-
-                <div>
-                    <p style="color: var(--brazil-green); font-weight: bold; margin-bottom: 4px;">TEENS & ADULTS</p>
-                    <p><strong>7:15 PM - 8:30 PM:</strong> Fundamentals BJJ Class</p>
-                </div>
+<section id="schedule" style="padding: 4rem 5%; background-color: #f8fafc; text-align: center;">
+    <h2 style="color: var(--brazil-green); margin-bottom: 2rem;">Class Schedule</h2>
+    <div style="max-width: 650px; margin: 0 auto; text-align: left;">
+        <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 6px solid var(--brazil-green); box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <h3 style="margin-bottom: 1rem; color: var(--text-dark); font-size: 1.4rem;">Wednesday</h3>
+            <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eee;">
+                <p style="color: var(--brazil-green); font-weight: bold; margin-bottom: 4px;">KIDS & YOUTH (Ages 4-12)</p>
+                <p><strong>6:15 PM - 7:15 PM:</strong> Little Tatankas (4-7 yrs) / Kid Confident (8-12 yrs)</p>
             </div>
-
-            <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; border-left: 6px solid var(--brazil-yellow); box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                <h3 style="margin-bottom: 1rem; color: var(--text-dark); font-size: 1.4rem;">Saturday</h3>
-
-                <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eee;">
-                    <p style="color: var(--brazil-green); font-weight: bold; margin-bottom: 4px;">KIDS & YOUTH (Ages 4-12)</p>
-                    <p><strong>12:15 PM - 1:15 PM:</strong> Little Tatankas (4-7 yrs) / Kid Confident (8-12 yrs)</p>
-                </div>
-
-                <div>
-                    <p style="color: var(--brazil-green); font-weight: bold; margin-bottom: 4px;">TEENS & ADULTS</p>
-                    <p><strong>1:15 PM - 2:30 PM:</strong> Intermediate BJJ Class</p>
-                </div>
+            <div>
+                <p style="color: var(--brazil-green); font-weight: bold; margin-bottom: 4px;">TEENS & ADULTS</p>
+                <p><strong>7:15 PM - 8:30 PM:</strong> Fundamentals BJJ Class</p>
             </div>
-            
         </div>
-        
-    </section>
-
-    <section id="contact" class="contact-section" style="padding-bottom: 2rem;">
-        <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Ready to Start?</h2>
-        <p style="opacity: 0.9;">Book your free trial class or ask us a question.</p>
-        
-        <form class="contact-form" onsubmit="alert('Demo Mode: In the real website, this will send an email to info@ccsabjj.com!'); return false;">
-            <input type="text" class="form-input" placeholder="Your Name" required>
-            <input type="email" class="form-input" placeholder="Your Email Address" required>
-            <textarea class="form-input" rows="4" placeholder="How can we help you?" required></textarea>
-            <button type="submit" class="form-btn">Send Message</button>
-        </form>
-    </section>
-
-    <footer style="padding-top: 2rem;">
-        
-        <div style="margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; border: 2px solid #333; max-width: 600px; margin-left: auto; margin-right: auto;">
-        <iframe 
-            width="100%" 
-            height="250" 
-            frameborder="0" 
-            style="border:0" 
-            src="https://maps.google.com/maps?q=1000+Notre+Dame+Ave,+Winnipeg,+MB&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-            allowfullscreen>
-        </iframe>
+        <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; border-left: 6px solid var(--brazil-yellow); box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <h3 style="margin-bottom: 1rem; color: var(--text-dark); font-size: 1.4rem;">Saturday</h3>
+            <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eee;">
+                <p style="color: var(--brazil-green); font-weight: bold; margin-bottom: 4px;">KIDS & YOUTH (Ages 4-12)</p>
+                <p><strong>12:15 PM - 1:15 PM:</strong> Little Tatankas (4-7 yrs) / Kid Confident (8-12 yrs)</p>
+            </div>
+            <div>
+                <p style="color: var(--brazil-green); font-weight: bold; margin-bottom: 4px;">TEENS & ADULTS</p>
+                <p><strong>1:15 PM - 2:30 PM:</strong> Intermediate BJJ Class</p>
+            </div>
         </div>
+    </div>
+</section>
 
-        <p style="margin-bottom: 1.5rem; color: #ccc;">
-            <strong>Brazil-021 Winnipeg</strong><br>
-            1000 Notre Dame Ave, Winnipeg, MB
-        </p>
-        
-        <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem;">
-    <a href="tel:4319975514" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">
-        📞 (431) 997-5514
-    </a>
-    
-    <a href="mailto:Brazil021wpg@gmail.com" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">
-        ✉️ Brazil021wpg@gmail.com
-    </a>
+<section id="contact" class="contact-section" style="padding-bottom: 2rem;">
+    <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Ready to Start?</h2>
+    <p style="opacity: 0.9;">Book your free trial class or ask us a question.</p>
+    <form class="contact-form" onsubmit="alert('Demo Mode: In the real website, this will send an email to info@ccsabjj.com!'); return false;">
+        <input type="text" class="form-input" placeholder="Your Name" required>
+        <input type="email" class="form-input" placeholder="Your Email Address" required>
+        <textarea class="form-input" rows="4" placeholder="How can we help you?" required></textarea>
+        <button type="submit" class="form-btn">Send Message</button>
+    </form>
+</section>
 
-    <a href="https://www.instagram.com/brazil021wpg" target="_blank" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">
-        📸 @brazil021wpg
-    </a>
+<footer style="padding-top: 2rem;">
+    <div style="margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; border: 2px solid #333; max-width: 600px; margin-left: auto; margin-right: auto;">
+        <iframe width="100%" height="250" frameborder="0" style="border:0" src="https://maps.google.com/maps?q=1000+Notre+Dame+Ave,+Winnipeg,+MB&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen></iframe>
+    </div>
+    <p style="margin-bottom: 1.5rem; color: #ccc;"><strong>Brazil-021 Winnipeg</strong><br>1000 Notre Dame Ave, Winnipeg, MB</p>
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem;">
+        <a href="tel:4319975514" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">📞 (431) 997-5514</a>
+        <a href="mailto:Brazil021wpg@gmail.com" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">✉️ Brazil021wpg@gmail.com</a>
+        <a href="https://www.instagram.com/brazil021wpg" target="_blank" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">📸 @brazil021wpg</a>
+    </div>
+    <p style="opacity: 0.5; font-size: 0.8rem;">© 2025 Brazil-021 Winnipeg.</p>
+</footer>
+
+<div id="bio1" class="bio-modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeBio('bio1')">×</span>
+        <h2 style="color: var(--brazil-green);">Professor Christina Barry</h2>
+        <p>Professor Christina is a 3rd Degree Black Belt and the founder of Brazil021 Winnipeg. An IBJJF-certified instructor since 2012, she earned her rank under legendary world champions Hannette Staack and Misty Shearer. Christina combines high-level competitive success—including two bronze medals at the World Masters—with a deep passion for teaching. She specializes in women’s self-defense and empowerment, fostering a supportive environment where students build confidence and resilience.</p>
+    </div>
 </div>
-        
-        <p style="opacity: 0.5; font-size: 0.8rem;">© 2025 Brazil-021 Winnipeg.</p>
-    </footer>
 
+<div id="bio2" class="bio-modal"><div class="modal-content"><span class="close-btn" onclick="closeBio('bio2')">×</span><h2 style="color: var(--brazil-green);">Instructor Calias Cowieson</h2><p>Cal received his black belt June 17, 2023 and is a jiu-jitsu encyclopedia when it comes to technique and self-defense.</p></div></div>
+<div id="bio3" class="bio-modal"><div class="modal-content"><span class="close-btn" onclick="closeBio('bio3')">×</span><h2 style="color: var(--brazil-green);">Instructor Jason McNamara</h2><p>Jason received his brown belt June 17, 2023. He is a self-defense specialist and CanFitPro certified trainer.</p></div></div>
+<div id="bio4" class="bio-modal"><div class="modal-content"><span class="close-btn" onclick="closeBio('bio4')">×</span><h2 style="color: var(--brazil-green);">Instructor Rich Roberts</h2><p>Rich received his purple belt June 17, 2023 and is a highly energetic instructor dedicated to student improvement.</p></div></div>
+<div id="bio5" class="bio-modal"><div class="modal-content"><span class="close-btn" onclick="closeBio('bio5')">×</span><h2 style="color: var(--brazil-green);">Instructor Quinton Sawatsky</h2><p>Quinton earned his purple belt June 25, 2025. He runs fantastic kids classes and breaks down techniques for everyone.</p></div></div>
+<div id="bio6" class="bio-modal"><div class="modal-content"><span class="close-btn" onclick="closeBio('bio6')">×</span><h2 style="color: var(--brazil-green);">Instructor Warren Kalyn</h2><p>Warren is a blue belt with competition experience in Gi and NoGi. He is detailed, patient, and highly organized.</p></div></div>
 
 <div id="class-adults" class="bio-modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeBio('class-adults')">×</span>
-            
-            <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
-                
-                <div style="flex: 1; min-width: 250px;">
-                    <img src="adult.jpg" alt="Adult BJJ Class" 
-                         style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #eee; display: block;">
-                </div>
-
-                <div style="flex: 1.5; min-width: 280px;">
-                    <h2 style="color: var(--brazil-green); margin-top: 0; margin-bottom: 1.5rem; line-height: 1.2;">Adults & Teens Program</h2>
-                    
-                    <h3 style="color: var(--text-dark); font-size: 1.1rem; margin-bottom: 0.5rem; border-bottom: 2px solid var(--brazil-yellow); display: inline-block;">BJJ - Fundamentals</h3>
-                    <p style="margin-bottom: 1.5rem; line-height: 1.6; font-size: 0.95rem;">
-                        An on-going jiu-jitsu class for teens and adults that includes self-defense and basic BJJ skills such as takedowns, guard passing, positional control and basic submissions. There will be sparring at the end of every class and semi-annual belt promotions.
-                    </p>
-
-                    <h3 style="color: var(--text-dark); font-size: 1.1rem; margin-bottom: 0.5rem; border-bottom: 2px solid var(--brazil-blue); display: inline-block;">BJJ - Advanced</h3>
-                    <p style="line-height: 1.6; font-size: 0.95rem;">
-                        Advanced jiu-jitsu techniques largely focused on sparring, open to all members but techniques will be more complicated than fundamentals class and include open guard sweeps, advanced submissions, detailed guard passes.
-                    </p>
-                </div>
-
-            </div>
-        </div>
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeBio('class-adults')">×</span>
+        <h2 style="color: var(--brazil-green); margin-bottom: 1rem;">Adults & Teens Program</h2>
+        <img src="adult.jpg" alt="Adult BJJ Class" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+        <h3>BJJ - Fundamentals</h3>
+        <p>An on-going jiu-jitsu class for teens and adults that includes self-defense and basic BJJ skills such as takedowns, guard passing, positional control and basic submissions.</p>
+        <hr style="margin: 15px 0;">
+        <h3>BJJ - Advanced</h3>
+        <p>Advanced jiu-jitsu techniques largely focused on sparring, open to all members but techniques will be more complicated than fundamentals class.</p>
     </div>
+</div>
 
-    <div id="class-kids" class="bio-modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeBio('class-kids')">×</span>
-            
-            <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
-                
-                <div style="flex: 1; min-width: 250px;">
-                    <img src="kids.jpg" alt="Kids BJJ Class" 
-                         style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #eee; display: block;">
-                </div>
-
-                <div style="flex: 1.5; min-width: 280px;">
-                    <h2 style="color: var(--brazil-green); margin-top: 0; margin-bottom: 0.5rem; line-height: 1.2;">Kids & Youth Program</h2>
-                    <p style="font-weight: bold; color: #555; margin-bottom: 1.5rem;">Little Tatankas (4-7) • Kid Confident (8-12)</p>
-                    
-                    <p style="line-height: 1.6; font-size: 1rem;">
-                        An on-going jiu-jitsu program for kids ages 4-12 years that includes self-defense, basic BJJ positions, takedowns, games, submissions, sparring and belt grading!
-                    </p>
-                </div>
-
-            </div>
-        </div>
+<div id="class-kids" class="bio-modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeBio('class-kids')">×</span>
+        <h2 style="color: var(--brazil-green); margin-bottom: 1rem;">Kids & Youth Program</h2>
+        <img src="kids.jpg" alt="Kids BJJ Class" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+        <h3>Little Tatankas (4-7) • Kid Confident (8-12)</h3>
+        <p>An on-going jiu-jitsu program for kids ages 4-12 years that includes self-defense, basic BJJ positions, takedowns, games, submissions, sparring and belt grading!</p>
     </div>
+</div>
 
-    <script>
-        // Function to Open the specific Bio Box
-        function openBio(id) {
-            var modal = document.getElementById(id);
-            if (modal) {
-                modal.style.display = "block";
-            } else {
-                console.error("Could not find bio box with ID: " + id);
-            }
-        }
-        
-        // Function to Close the specific Bio Box
-        function closeBio(id) {
-            document.getElementById(id).style.display = "none";
-        }
+<script>
+    function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('open');
+    }
+    
+    function openBio(id) {
+        var modal = document.getElementById(id);
+        if (modal) modal.style.display = "block";
+    }
+    
+    function closeBio(id) {
+        document.getElementById(id).style.display = "none";
+    }
 
-        // Close modal if user clicks outside the white box (the dark background)
-        window.onclick = function(event) {
-            if (event.target.className === "bio-modal") {
-                event.target.style.display = "none";
-            }
+    window.onclick = function(event) {
+        if (event.target.className === "bio-modal") {
+            event.target.style.display = "none";
         }
-    </script>
-
+    }
+</script>
 </body>
 </html>

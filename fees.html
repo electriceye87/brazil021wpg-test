@@ -16,79 +16,84 @@
         }
 
         /* --- GLOBAL RESET --- */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         html { scroll-behavior: smooth; }
+        body { background-color: var(--white); color: var(--text-dark); line-height: 1.6; }
 
         /* --- NAVIGATION --- */
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 5%;
-            background: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 5%; background: white;
+            position: sticky; top: 0; z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            height: 90px;
+        }
+        .logo-text img { height: 70px; }
+        
+        .nav-links { display: flex; align-items: center; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--brazil-green); }
+
+        /* LOGIN BUTTON STYLE */
+        .nav-links .login-btn {
+            background-color: var(--brazil-yellow);
+            color: var(--brazil-green) !important;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-links .login-btn:hover {
+            background-color: #f0cc2d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
 
-        .logo-text img { height: 85px; }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            margin-left: 20px;
-            font-weight: 600;
-            transition: 0.3s;
+        /* --- MOBILE MENU STYLES --- */
+        .hamburger { 
+            display: none; 
+            flex-direction: column; 
+            gap: 6px; 
+            cursor: pointer; 
+            background: none; 
+            border: none; 
+            padding: 10px; 
+            z-index: 2001; 
         }
-
-        /* --- HAMBURGER (Hidden on Desktop) --- */
-        .hamburger {
-            display: none; /* This ensures it stays hidden on laptop */
-            flex-direction: column;
-            cursor: pointer;
-            z-index: 9999;
+        .hamburger span { 
+            display: block; width: 30px; height: 3px; 
+            background-color: var(--brazil-green); 
+            border-radius: 3px; 
         }
+        .close-btn { display: none; }
 
-        .hamburger span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background-color: var(--brazil-green);
-            margin: 5px 0;
-            transition: 0.3s;
-        }
+        @media (max-width: 900px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                display: none; 
+                position: fixed; top: 0; right: 0; width: 100%; height: 100vh;
+                background: var(--brazil-green); 
+                flex-direction: column; justify-content: center; align-items: center;
+                z-index: 2000; gap: 25px;
+            }
+            .nav-links.open { display: flex; }
+            
+            .nav-links a { 
+                color: white !important; font-size: 1.5rem !important; 
+                font-weight: bold; text-transform: uppercase; margin: 0;
+            }
+            
+            .nav-links .login-btn {
+                background: none !important; box-shadow: none !important; padding: 0 !important;
+                color: var(--brazil-yellow) !important;
+            }
 
-        /* --- MOBILE MENU --- */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 280px;
-            height: 100vh;
-            background-color: var(--brazil-green);
-            display: flex;
-            flex-direction: column;
-            padding: 40px; /* Space for the CLOSE link */
-            gap: 20px;
-            transition: 0.4s ease-in-out;
-            z-index: 9000;
-        }
-
-        .mobile-menu.active { right: 0; }
-
-        .mobile-menu a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.3rem;
-            font-weight: 700;
-            text-align: left;
+            .close-btn { 
+                display: block !important; color: white; font-weight: bold; 
+                margin-bottom: 40px; cursor: pointer; font-size: 1rem; 
+                text-transform: uppercase; letter-spacing: 2px;
+                border: 1px solid rgba(255,255,255,0.4); padding: 10px 25px; border-radius: 5px;
+            }
         }
 
         /* --- PAGE LAYOUT --- */
@@ -138,16 +143,9 @@
         .features li::before { content: "✓"; color: var(--brazil-green); font-weight: bold; margin-right: 10px; }
 
         .pay-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            background: var(--brazil-yellow);
-            color: var(--brazil-blue);
-            transition: 0.3s;
+            display: block; width: 100%; padding: 12px; text-align: center;
+            text-decoration: none; font-weight: bold; border-radius: 5px;
+            background: var(--brazil-yellow); color: var(--brazil-blue); transition: 0.3s;
         }
         .pay-btn:hover { background: var(--brazil-green); color: white; }
 
@@ -158,21 +156,8 @@
         .faq-item p { color: #555; line-height: 1.6; }
 
         /* --- FOOTER --- */
-        footer {
-            background-color: var(--brazil-green);
-            color: var(--white);
-            padding: 60px 5% 40px 5%;
-            text-align: center;
-            margin-top: 60px;
-        }
-        .home-link { color: var(--white); text-decoration: underline; margin-left: 10px; }
-
-        /* --- MOBILE MEDIA QUERY (Where hamburger appears) --- */
-        @media (max-width: 768px) {
-            .nav-links { display: none !important; }
-            .hamburger { display: flex !important; } /* Only shows on mobile */
-            h1 { font-size: 2rem; }
-        }
+        footer { background: var(--brazil-green); color: white; padding: 4rem 5%; text-align: center; }
+        footer a { color: var(--brazil-yellow); text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -182,30 +167,21 @@
         <a href="index.html"><img src="logo.webp" alt="Brazil 021 Logo"></a>
     </div>
     
-    <div class="nav-links">
+    <button class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+        <span class="close-btn" onclick="toggleMenu()">✕ CLOSE</span>
         <a href="index.html">Home</a>
-        <a href="fees.html" style="color: var(--brazil-yellow);">Membership & Fees</a>
+        <a href="fees.html" style="color: var(--brazil-green);">Membership & Fees</a>
         <a href="#faq">FAQ</a>
         <a href="index.html#contact">Contact</a>
-    </div>
-
-    <div class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
+        <a href="members.html" class="login-btn">Login</a>
     </div>
 </nav>
-
-<div class="mobile-menu" id="mobileMenu">
-    <a href="javascript:void(0)" onclick="toggleMenu()" style="color: var(--brazil-yellow); font-size: 0.9rem; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">
-        CLOSE [X]
-    </a>
-    
-    <a href="index.html" onclick="toggleMenu()">Home</a>
-    <a href="fees.html" onclick="toggleMenu()">Membership & Fees</a>
-    <a href="#faq" onclick="toggleMenu()">FAQ</a>
-    <a href="index.html#contact" onclick="toggleMenu()">Contact</a>
-</div>
 
 <div class="container">
     <h1>Membership & Fees</h1>
@@ -299,24 +275,33 @@
 
 <footer style="padding-top: 2rem;">
     <div style="margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; border: 2px solid #333; max-width: 600px; margin-left: auto; margin-right: auto;">
-        <iframe width="100%" height="250" frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2570.686526131339!2d-97.1772439!3d49.8860713!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x52ea7396a603a11f%3A0xc485121e7d89694b!2s1000%20Notre%20Dame%20Ave%2C%20Winnipeg%2C%20MB!5e0!3m2!1sen!2sca!4v1710000000000" allowfullscreen></iframe>
+        <iframe 
+            width="100%" 
+            height="250" 
+            frameborder="0" 
+            style="border:0" 
+            src="https://maps.google.com/maps?q=1000+Notre+Dame+Ave,+Winnipeg,+MB&output=embed" 
+            allowfullscreen>
+        </iframe>
     </div>
+    
     <p style="margin-bottom: 1.5rem; color: #ccc;">
         <strong>Brazil-021 Winnipeg</strong><br>
         1000 Notre Dame Ave, Winnipeg, MB
     </p>
+    
     <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem;">
         <a href="tel:4319975514" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">📞 (431) 997-5514</a>
         <a href="mailto:Brazil021wpg@gmail.com" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">✉️ Brazil021wpg@gmail.com</a>
         <a href="https://www.instagram.com/brazil021wpg" target="_blank" style="color: var(--brazil-yellow); text-decoration: none; font-size: 1.1rem; font-weight: bold;">📸 @brazil021wpg</a>
     </div>
-    <p style="opacity: 0.5; font-size: 0.8rem;">© 2025 Brazil-021 Winnipeg. <a href="index.html" class="home-link">Back to Home</a></p>
+    
+    <p style="opacity: 0.5; font-size: 0.8rem;">© 2025 Brazil-021 Winnipeg. <a href="index.html" style="color: white; text-decoration: underline;">Back to Home</a></p>
 </footer>
 
 <script>
     function toggleMenu() {
-        const menu = document.getElementById('mobileMenu');
-        menu.classList.toggle('active');
+        document.getElementById('navLinks').classList.toggle('open');
     }
 </script>
 

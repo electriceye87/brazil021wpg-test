@@ -158,7 +158,15 @@
         /* --- FOOTER --- */
         footer { background: var(--brazil-green); color: white; padding: 4rem 5%; text-align: center; }
         footer a { color: var(--brazil-yellow); text-decoration: none; font-weight: bold; }
-    </style>
+.active-link { 
+    color: var(--brazil-green); 
+    border-bottom: 2px solid var(--brazil-yellow); 
+}
+/* Mobile override to keep it white on the green background */
+@media (max-width: 900px) {
+    .nav-links .active-link { color: white !important; border-bottom: none; }
+}    
+	</style>
 </head>
 <body>
 
@@ -176,7 +184,7 @@
     <div class="nav-links" id="navLinks">
         <span class="close-btn" onclick="toggleMenu()">✕ CLOSE</span>
         <a href="index.html">Home</a>
-        <a href="fees.html" style="color: var(--brazil-green);">Membership & Fees</a>
+        <a href="fees.html" class="active-link">Membership & Fees</a>
         <a href="#faq">FAQ</a>
         <a href="index.html#contact">Contact</a>
         <a href="members.html" class="login-btn">Login</a>

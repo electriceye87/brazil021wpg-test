@@ -418,14 +418,60 @@
 <section id="contact" class="contact-section" style="padding-bottom: 2rem;">
     <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Ready to Start?</h2>
     <p style="opacity: 0.9;">Book your free trial class or ask us a question.</p>
-    <form class="contact-form" onsubmit="alert('Demo Mode: In the real website, this will send an email to info@ccsabjj.com!'); return false;">
-        <input type="text" class="form-input" placeholder="Your Name" required>
-        <input type="email" class="form-input" placeholder="Your Email Address" required>
-        <textarea class="form-input" rows="4" placeholder="How can we help you?" required></textarea>
-        <button type="submit" class="form-btn">Send Message</button>
+    
+    <form id="my-form" action="https://formspree.io/f/xojvwora" method="POST" class="contact-form">
+        
+        <input type="text" name="name" class="form-input" placeholder="Your Name" required>
+        
+        <input type="email" name="email" class="form-input" placeholder="Your Email Address" required>
+        
+        <textarea name="message" class="form-input" rows="4" placeholder="How can we help you?" required></textarea>
+        
+        <button id="my-form-button" type="submit" class="form-btn">Send Message</button>
+        
+        <p id="my-form-status" style="margin-top:15px; font-weight:bold; display:none;"></p>
     </form>
 </section>
 
+<script>
+    var form = document.getElementById("my-form");
+    
+    async function handleSubmit(event) {
+      event.preventDefault(); // Stop the page from jumping
+      var status = document.getElementById("my-form-status");
+      var data = new FormData(event.target);
+
+      fetch(event.target.action, {
+        method: form.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          status.innerHTML = "✅ Message sent! We will be in touch soon.";
+          status.style.color = "green";
+          status.style.display = "block";
+          form.reset(); // Clear the inputs
+        } else {
+          response.json().then(data => {
+            if (Object.hasOwn(data, 'errors')) {
+              status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+            } else {
+              status.innerHTML = "❌ Oops! There was a problem submitting your form";
+            }
+            status.style.color = "red";
+            status.style.display = "block";
+          })
+        }
+      }).catch(error => {
+        status.innerHTML = "❌ Oops! There was a problem submitting your form";
+        status.style.color = "red";
+        status.style.display = "block";
+      });
+    }
+    form.addEventListener("submit", handleSubmit);
+</script>
 <footer style="padding-top: 2rem;">
     <div style="margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; border: 2px solid #333; max-width: 600px; margin-left: auto; margin-right: auto;">
         <iframe width="100%" height="250" frameborder="0" style="border:0" src="https://maps.google.com/maps?q=1000+Notre+Dame+Ave,+Winnipeg,+MB&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen></iframe>

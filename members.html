@@ -232,16 +232,10 @@
         }
     });
 
+   // DEBUG VERSION: Shows you the code you need
     function checkPassword() {
-        const inputField = document.getElementById('passInput');
-        const input = inputField.value;
-
-        if (!input) {
-            alert("Please type a password.");
-            return;
-        }
-
-        // SIMPLE HASHING
+        const input = document.getElementById('passInput').value;
+        
         let hash = 0;
         for (let i = 0; i < input.length; i++) {
             let char = input.charCodeAt(i);
@@ -253,17 +247,9 @@
         if (userHash === CORRECT_HASH) {
             unlockPortal();
         } else {
-            alert("Incorrect password. (Try: OSS2026)");
-            inputField.value = ""; // Clear the box
+            // THIS ALERT WILL TELL YOU THE REAL NUMBER
+            alert("Access Denied. The code for this password is: " + userHash);
         }
-    }
-
-    function unlockPortal() {
-        document.getElementById('passwordGate').style.display = "none";
-        document.getElementById('memberContent').style.display = "block";
-        window.scrollTo(0,0);
-        localStorage.setItem('bjj_session', 'active');
-        loadAllPortalData();
     }
 
     // ==========================================

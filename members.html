@@ -202,7 +202,7 @@
     const NEWSLETTER_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pub?gid=335399623&single=true&output=csv";
     const VIDEO_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pub?gid=17348161&single=true&output=csv";
 
-    // Password: "OSS2026"
+    // UPDATED HASH (From your debugging session)
     const CORRECT_HASH = "-447244175"; 
 
     // ==========================================
@@ -227,15 +227,19 @@
         const btn = document.getElementById('enterBtn');
         if(btn) {
             btn.addEventListener('click', checkPassword);
-        } else {
-            console.error("Could not find the 'Enter Portal' button!");
         }
     });
 
-   // DEBUG VERSION: Shows you the code you need
     function checkPassword() {
-        const input = document.getElementById('passInput').value;
-        
+        const inputField = document.getElementById('passInput');
+        const input = inputField.value;
+
+        if (!input) {
+            alert("Please type a password.");
+            return;
+        }
+
+        // SIMPLE HASHING
         let hash = 0;
         for (let i = 0; i < input.length; i++) {
             let char = input.charCodeAt(i);
@@ -244,12 +248,24 @@
         }
         let userHash = hash.toString();
 
-        if (userHash === CORRECT_HASH) {
+        // LOOSE MATCHING (Fixes Text vs Number issues)
+        if (userHash == CORRECT_HASH) {
             unlockPortal();
         } else {
-            // THIS ALERT WILL TELL YOU THE REAL NUMBER
-            alert("Access Denied. The code for this password is: " + userHash);
+            console.log("You Typed:", input);
+            console.log("Your Hash:", userHash);
+            console.log("Target:", CORRECT_HASH);
+            alert("Incorrect password. (Try checking for spaces!)");
+            inputField.value = ""; 
         }
+    }
+
+    function unlockPortal() {
+        document.getElementById('passwordGate').style.display = "none";
+        document.getElementById('memberContent').style.display = "block";
+        window.scrollTo(0,0);
+        localStorage.setItem('bjj_session', 'active');
+        loadAllPortalData();
     }
 
     // ==========================================
@@ -258,7 +274,7 @@
     
     function loadAllPortalData() {
         if (typeof Papa === 'undefined') {
-            alert("Error: PapaParse library is missing! Add the script to your <head>.");
+            alert("Error: PapaParse library is missing!");
             return;
         }
         console.log("Fetching data from Google Sheets...");

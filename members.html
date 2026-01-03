@@ -135,7 +135,7 @@
 <div id="passwordGate">
     <img src="logo.webp" alt="Logo">
     <input type="password" id="passInput" placeholder="Password">
-    <button onclick="checkPassword()">Enter Portal</button>
+    <button id="enterBtn">Enter Portal</button>
 </div>
 
 <div id="memberContent" style="display: none;">
@@ -175,4 +175,186 @@
         <section id="section-videos" class="portal-section">
             <h2 class="section-title">Technique Library</h2>
             <div class="video-controls">
-                <input type="text"
+                <input type="text" id="portalSearch" placeholder="Search techniques..." onkeyup="runFilters()">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="setCategory('all', this)">All</button>
+                    <button class="filter-btn" onclick="setCategory('guard', this)">Guard</button>
+                    <button class="filter-btn" onclick="setCategory('passing', this)">Passing</button>
+                    <button class="filter-btn" onclick="setCategory('side-control', this)">Side Control</button>
+                    <button class="filter-btn" onclick="setCategory('mount', this)">Mount</button>
+                    <button class="filter-btn" onclick="setCategory('back', this)">Back</button>
+                </div>
+            </div>
+            <div class="video-grid" id="video-container">Loading...</div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Brazil-021 Winnipeg | <a href="javascript:void(0)" onclick="location.reload()" style="color: white;">Logout</a></p>
+    </footer>
+</div>
+
+<script>
+    // ==========================================
+    // 1. CONFIGURATION
+    // ==========================================
+    const NEWS_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pub?gid=0&single=true&output=csv";
+    const NEWSLETTER_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pub?gid=335399623&single=true&output=csv";
+    const VIDEO_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pub?gid=17348161&single=true&output=csv";
+
+    // Password: "OSS2026"
+    const CORRECT_HASH = "-1262624891"; 
+
+    // ==========================================
+    // 2. PASSWORD LOGIC
+    // ==========================================
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Check if already logged in
+        if(localStorage.getItem('bjj_session') === 'active') {
+            unlockPortal();
+        }
+
+        // 2. Connect the "Enter" key
+        const input = document.getElementById('passInput');
+        if(input) {
+            input.addEventListener('keypress', (e) => { 
+                if (e.key === 'Enter') checkPassword(); 
+            });
+        }
+
+        // 3. Connect the Button
+        const btn = document.getElementById('enterBtn');
+        if(btn) {
+            btn.addEventListener('click', checkPassword);
+        } else {
+            console.error("Could not find the 'Enter Portal' button!");
+        }
+    });
+
+    function checkPassword() {
+        const inputField = document.getElementById('passInput');
+        const input = inputField.value;
+
+        if (!input) {
+            alert("Please type a password.");
+            return;
+        }
+
+        // SIMPLE HASHING
+        let hash = 0;
+        for (let i = 0; i < input.length; i++) {
+            let char = input.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash; 
+        }
+        let userHash = hash.toString();
+
+        if (userHash === CORRECT_HASH) {
+            unlockPortal();
+        } else {
+            alert("Incorrect password. (Try: OSS2026)");
+            inputField.value = ""; // Clear the box
+        }
+    }
+
+    function unlockPortal() {
+        document.getElementById('passwordGate').style.display = "none";
+        document.getElementById('memberContent').style.display = "block";
+        window.scrollTo(0,0);
+        localStorage.setItem('bjj_session', 'active');
+        loadAllPortalData();
+    }
+
+    // ==========================================
+    // 3. GOOGLE SHEETS LOGIC
+    // ==========================================
+    
+    function loadAllPortalData() {
+        if (typeof Papa === 'undefined') {
+            alert("Error: PapaParse library is missing! Add the script to your <head>.");
+            return;
+        }
+        console.log("Fetching data from Google Sheets...");
+        loadSheet(NEWS_SHEET_URL, 'news-container', renderNews);
+        loadSheet(NEWSLETTER_SHEET_URL, 'newsletter-container', renderNewsletters);
+        loadSheet(VIDEO_SHEET_URL, 'video-container', renderVideos, true);
+    }
+
+    function loadSheet(url, containerId, renderFunc, isVideo = false) {
+        Papa.parse(url, {
+            download: true,
+            header: true,
+            skipEmptyLines: true,
+            complete: function(results) {
+                const data = results.data;
+                if (isVideo) videoData = data; 
+                renderFunc(data, containerId);
+            },
+            error: function(err) {
+                console.error("Error loading sheet:", err);
+                document.getElementById(containerId).innerHTML = "<p>Error loading data.</p>";
+            }
+        });
+    }
+
+    // ==========================================
+    // 4. RENDERING LOGIC
+    // ==========================================
+    let currentCategory = 'all';
+    let videoData = [];
+
+    function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    function renderNews(data, id) {
+        let html = '';
+        data.forEach(item => {
+            if(!item.title) return;
+            html += `<div style="background:#f9f9f9; padding:20px; border-radius:8px; border-left:4px solid var(--brazil-green); margin-bottom:15px; text-align:left;">
+                <h3 style="color:var(--brazil-green)">${item.title}</h3><p>${item.body}</p><small>${item.date}</small></div>`;
+        });
+        document.getElementById(id).innerHTML = html;
+    }
+
+    function renderNewsletters(data, id) {
+        let html = '';
+        data.forEach(item => {
+            if(!item.name) return;
+            html += `<div class="newsletter-item"><span>${item.name}</span><a href="${item.link}" target="_blank">📄 View PDF</a></div>`;
+        });
+        document.getElementById(id).innerHTML = html;
+    }
+
+    function renderVideos(data, id) {
+        let html = '';
+        data.forEach(item => {
+            if(!item.title) return;
+            html += `<div class="video-item" data-category="${item.category}" data-title="${item.title.toLowerCase()}">
+                <div class="video-card"><iframe src="https://www.youtube.com/embed/${item.youtubeId}" allowfullscreen></iframe></div>
+                <div class="video-info"><p class="video-title">${item.title}</p><span class="video-tag">${item.category.toUpperCase()}</span></div></div>`;
+        });
+        document.getElementById(id).innerHTML = html;
+        runFilters();
+    }
+
+    function setCategory(cat, btn) {
+        currentCategory = cat;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        runFilters();
+    }
+
+    function runFilters() {
+        const search = document.getElementById('portalSearch').value.toLowerCase();
+        const items = document.getElementsByClassName('video-item');
+        for (let item of items) {
+            const matchesSearch = item.getAttribute('data-title').includes(search);
+            const matchesCat = currentCategory === 'all' || item.getAttribute('data-category') === currentCategory;
+            item.style.display = (matchesSearch && matchesCat) ? "block" : "none";
+        }
+    }
+</script>
+</body>
+</html>

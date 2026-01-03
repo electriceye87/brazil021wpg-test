@@ -8,7 +8,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
     <style>
-        /* --- BRAND COLORS --- */
         :root {
             --brazil-green: #2d5f42;
             --brazil-yellow: #fdd835;
@@ -30,19 +29,14 @@
         .nav-links .active-link { color: var(--brazil-green); border-bottom: 2px solid var(--brazil-yellow); }
         .section-jump { color: var(--brazil-blue) !important; font-size: 0.85rem !important; text-transform: uppercase; }
 
-        /* --- CLEAN HAMBURGER --- */
         .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; background: none; border: none; padding: 10px; }
         .hamburger span { display: block; width: 30px; height: 3px; background-color: var(--brazil-green); border-radius: 3px; }
 
-        /* --- MOBILE MENU OVERLAY --- */
         @media (max-width: 900px) {
             .hamburger { display: flex; }
             .nav-links {
-                display: none; 
-                position: fixed; top: 0; right: 0; width: 100%; height: 100vh;
-                background: var(--brazil-green); 
-                flex-direction: column; justify-content: center;
-                z-index: 2000;
+                display: none; position: fixed; top: 0; right: 0; width: 100%; height: 100vh;
+                background: var(--brazil-green); flex-direction: column; justify-content: center; z-index: 2000;
             }
             .nav-links.open { display: flex; }
             .nav-links a { color: white !important; font-size: 1.5rem !important; margin: 15px 0; font-weight: bold; text-transform: uppercase; }
@@ -63,53 +57,13 @@
         .portal-section { background: white; border-radius: 12px; padding: 30px; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); scroll-margin-top: 120px; }
         .section-title { color: var(--brazil-green); border-left: 6px solid var(--brazil-yellow); padding-left: 15px; margin-bottom: 25px; font-size: 1.6rem; text-transform: uppercase; }
 
-        /* --- FIXED NEWSLETTER STYLES --- */
-        .newsletter-item { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 20px 0; 
-            border-bottom: 1px solid #eee;
-            gap: 20px;
-        }
-
-        .newsletter-item span { 
-            font-weight: 600; 
-            color: var(--brazil-green); 
-            font-size: 1.1rem;
-            flex: 1; /* Pushes the button to the right */
-        }
-
-        .newsletter-item a { 
-            background: var(--brazil-yellow); 
-            color: var(--brazil-green); 
-            padding: 12px 20px; 
-            border-radius: 6px; 
-            text-decoration: none; 
-            font-weight: 800; 
-            font-size: 0.8rem; 
-            text-transform: uppercase;
-            transition: 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            white-space: nowrap;
-            display: inline-block;
-        }
-
-        .newsletter-item a:hover { 
-            background: #f0cc2d; 
-            transform: translateY(-1px); 
-        }
-
+        .newsletter-item { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #eee; gap: 20px; }
+        .newsletter-item span { font-weight: 600; color: var(--brazil-green); font-size: 1.1rem; flex: 1; }
+        .newsletter-item a { background: var(--brazil-yellow); color: var(--brazil-green); padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; transition: 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1); white-space: nowrap; display: inline-block; }
+        .newsletter-item a:hover { background: #f0cc2d; transform: translateY(-1px); }
         @media (max-width: 600px) {
-            .newsletter-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            .newsletter-item a {
-                width: 100%;
-                text-align: center;
-            }
+            .newsletter-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .newsletter-item a { width: 100%; text-align: center; }
         }
 
         /* --- VIDEO DASHBOARD --- */
@@ -119,8 +73,9 @@
         .filter-btn { padding: 8px 15px; border-radius: 5px; border: 1px solid var(--brazil-green); background: white; cursor: pointer; font-weight: bold; color: var(--brazil-green); }
         .filter-btn.active { background: var(--brazil-green); color: white; }
 
-        /* Old code had "auto-fit" - change it to "auto-fill" */
-.video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        /* FIXED: Using auto-fill keeps videos normal sized */
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        
         .video-item { background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
         .video-card { position: relative; padding-top: 56.25%; background: #000; }
         .video-card iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
@@ -191,32 +146,23 @@
     </div>
 
     <footer>
-        <p>© 2025 Brazil-021 Winnipeg | <a href="javascript:void(0)" onclick="location.reload()" style="color: white;">Logout</a></p>
+        <p>© 2025 Brazil-021 Winnipeg | <a href="javascript:void(0)" onclick="logout()" style="color: white;">Logout</a></p>
     </footer>
 </div>
 
 <script>
-    // ==========================================
-    // 1. CONFIGURATION
-    // ==========================================
     const NEWS_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pub?gid=0&single=true&output=csv";
     const NEWSLETTER_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pub?gid=335399623&single=true&output=csv";
     const VIDEO_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pub?gid=17348161&single=true&output=csv";
 
-    // UPDATED HASH (From your debugging session)
+    // Authentication Key
     const CORRECT_HASH = "-447244175"; 
 
-    // ==========================================
-    // 2. PASSWORD LOGIC
-    // ==========================================
-    
     document.addEventListener('DOMContentLoaded', () => {
-        // 1. Check if already logged in
         if(localStorage.getItem('bjj_session') === 'active') {
             unlockPortal();
         }
 
-        // 2. Connect the "Enter" key
         const input = document.getElementById('passInput');
         if(input) {
             input.addEventListener('keypress', (e) => { 
@@ -224,7 +170,6 @@
             });
         }
 
-        // 3. Connect the Button
         const btn = document.getElementById('enterBtn');
         if(btn) {
             btn.addEventListener('click', checkPassword);
@@ -235,12 +180,8 @@
         const inputField = document.getElementById('passInput');
         const input = inputField.value;
 
-        if (!input) {
-            alert("Please type a password.");
-            return;
-        }
+        if (!input) { return; }
 
-        // SIMPLE HASHING
         let hash = 0;
         for (let i = 0; i < input.length; i++) {
             let char = input.charCodeAt(i);
@@ -249,14 +190,10 @@
         }
         let userHash = hash.toString();
 
-        // LOOSE MATCHING (Fixes Text vs Number issues)
         if (userHash == CORRECT_HASH) {
             unlockPortal();
         } else {
-            console.log("You Typed:", input);
-            console.log("Your Hash:", userHash);
-            console.log("Target:", CORRECT_HASH);
-            alert("Incorrect password. (Try checking for spaces!)");
+            alert("Incorrect password.");
             inputField.value = ""; 
         }
     }
@@ -269,16 +206,16 @@
         loadAllPortalData();
     }
 
-    // ==========================================
-    // 3. GOOGLE SHEETS LOGIC
-    // ==========================================
+    function logout() {
+        localStorage.removeItem('bjj_session');
+        location.reload();
+    }
+
+    // --- DATA LOADING ---
     
     function loadAllPortalData() {
-        if (typeof Papa === 'undefined') {
-            alert("Error: PapaParse library is missing!");
-            return;
-        }
-        console.log("Fetching data from Google Sheets...");
+        if (typeof Papa === 'undefined') { return; }
+        
         loadSheet(NEWS_SHEET_URL, 'news-container', renderNews);
         loadSheet(NEWSLETTER_SHEET_URL, 'newsletter-container', renderNewsletters);
         loadSheet(VIDEO_SHEET_URL, 'video-container', renderVideos, true);
@@ -296,14 +233,11 @@
             },
             error: function(err) {
                 console.error("Error loading sheet:", err);
-                document.getElementById(containerId).innerHTML = "<p>Error loading data.</p>";
             }
         });
     }
 
-    // ==========================================
-    // 4. RENDERING LOGIC
-    // ==========================================
+    // --- RENDERING ---
     let currentCategory = 'all';
     let videoData = [];
 

@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Members Portal | Brazil 021 Winnipeg</title>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
     <style>
         /* --- BRAND COLORS --- */
         :root {
@@ -173,58 +175,4 @@
         <section id="section-videos" class="portal-section">
             <h2 class="section-title">Technique Library</h2>
             <div class="video-controls">
-                <input type="text" id="portalSearch" placeholder="Search techniques..." onkeyup="runFilters()">
-                <div class="filter-buttons">
-                    <button class="filter-btn active" onclick="setCategory('all', this)">All</button>
-                    <button class="filter-btn" onclick="setCategory('guard', this)">Guard</button>
-                    <button class="filter-btn" onclick="setCategory('passing', this)">Passing</button>
-                    <button class="filter-btn" onclick="setCategory('side-control', this)">Side Control</button>
-                    <button class="filter-btn" onclick="setCategory('mount', this)">Mount</button>
-                    <button class="filter-btn" onclick="setCategory('back', this)">Back</button>
-                </div>
-            </div>
-            <div class="video-grid" id="video-container">Loading...</div>
-        </section>
-    </div>
-
-    <footer>
-        <p>© 2025 Brazil-021 Winnipeg | <a href="javascript:void(0)" onclick="location.reload()" style="color: white;">Logout</a></p>
-    </footer>
-</div>
-
-<script>
-    // ==========================================
-    // 1. CONFIGURATION
-    // ==========================================
-    
-    // UPDATED LINKS (I fixed the Video link for you here)
-    const NEWS_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pub?gid=0&single=true&output=csv";
-    const NEWSLETTER_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pub?gid=335399623&single=true&output=csv";
-    const VIDEO_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pub?gid=17348161&single=true&output=csv";
-
-    // The Simple Hash for "OSS2026"
-    const CORRECT_HASH = "-1262624891"; 
-
-    // ==========================================
-    // 2. PASSWORD LOGIC
-    // ==========================================
-    
-    document.addEventListener('DOMContentLoaded', () => {
-        if(localStorage.getItem('bjj_session') === 'active') {
-            unlockPortal();
-        }
-    });
-
-    document.getElementById('passInput').addEventListener('keypress', (e) => { 
-        if (e.key === 'Enter') checkPassword(); 
-    });
-
-    function checkPassword() {
-        const input = document.getElementById('passInput').value;
-        if (!input) { alert("Please enter a password."); return; }
-
-        // SIMPLE HASHING (Works everywhere, easier to debug)
-        let hash = 0;
-        for (let i = 0; i < input.length; i++) {
-            let char = input.charCodeAt(i);
-            hash
+                <input type="text"

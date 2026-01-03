@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Members Portal | Brazil 021 Winnipeg</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <style>
         /* --- BRAND COLORS --- */
         :root {
@@ -192,136 +193,38 @@
 </div>
 
 <script>
-    let currentCategory = 'all';
-    let videoData = [];
-
-    // --- NEW SECURE SESSION CHECK ---
-    // This keeps them logged in if they refresh the page
-    document.addEventListener('DOMContentLoaded', () => {
-        if(localStorage.getItem('bjj_session') === 'active') {
-            document.getElementById('passwordGate').style.display = "none";
-            document.getElementById('memberContent').style.display = "block";
-            loadAllPortalData();
-        }
-    });
-
-    function toggleMenu() {
-        document.getElementById('navLinks').classList.toggle('open');
-    }
-
-    // --- NEW SECURE PASSWORD FUNCTION ---
-    async function checkPassword() {
-        const input = document.getElementById('passInput').value;
-        
-        // This is the secure hash for "OSS2026"
-        const CORRECT_HASH = "84d89877f0d4041efb6bf91a16f0248f2fd573e6af05c19f96bedb9f882f7882";
-
-        if (!input) {
-            alert("Please enter a password.");
-            return;
-        }
-
-        // Convert user input to hash
-        const msgBuffer = new TextEncoder().encode(input);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const userHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-
-        if (userHash === CORRECT_HASH) {
-            // Success
-            document.getElementById('passwordGate').style.display = "none";
-            document.getElementById('memberContent').style.display = "block";
-            window.scrollTo(0,0);
-            
-            // Save session
-            localStorage.setItem('bjj_session', 'active');
-            
-            // Load content
-            loadAllPortalData();
-        } else {
-            alert("Incorrect password.");
-        }
-    }
-
-/* --- NEW GOOGLE SHEETS LOGIC --- */
-
-    // PASTE YOUR 3 GOOGLE CSV LINKS HERE
+    // ==========================================
+    // 1. CONFIGURATION
+    // ==========================================
+    
+    // UPDATED LINKS (I fixed the Video link for you here)
     const NEWS_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pub?gid=0&single=true&output=csv";
     const NEWSLETTER_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pub?gid=335399623&single=true&output=csv";
-    const VIDEO_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pubhtml?gid=17348161&single=true";
+    const VIDEO_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pub?gid=17348161&single=true&output=csv";
 
-    function loadAllPortalData() {
-        console.log("Loading data from Sheets...");
-        loadSheet(NEWS_SHEET_URL, 'news-container', renderNews);
-        loadSheet(NEWSLETTER_SHEET_URL, 'newsletter-container', renderNewsletters);
-        loadSheet(VIDEO_SHEET_URL, 'video-container', renderVideos, true);
-    }
+    // The Simple Hash for "OSS2026"
+    const CORRECT_HASH = "-1262624891"; 
 
-    function loadSheet(url, containerId, renderFunc, isVideo = false) {
-        Papa.parse(url, {
-            download: true,
-            header: true,
-            skipEmptyLines: true, // Ignores blank rows
-            complete: function(results) {
-                const data = results.data;
-                if (isVideo) videoData = data; // Save for filtering
-                renderFunc(data, containerId);
-            },
-            error: function(err) {
-                console.error("Error loading sheet:", err);
-                document.getElementById(containerId).innerHTML = "<p>Error loading data.</p>";
-            }
-        });
-    }
-
-    function renderNews(data, id) {
-        let html = '';
-        data.forEach(item => {
-            html += `<div style="background:#f9f9f9; padding:20px; border-radius:8px; border-left:4px solid var(--brazil-green); margin-bottom:15px; text-align:left;">
-                <h3 style="color:var(--brazil-green)">${item.title}</h3><p>${item.body}</p><small>${item.date}</small></div>`;
-        });
-        document.getElementById(id).innerHTML = html;
-    }
-
-    function renderNewsletters(data, id) {
-        let html = '';
-        data.forEach(item => {
-            html += `<div class="newsletter-item"><span>${item.name}</span><a href="${item.link}" target="_blank">📄 View PDF</a></div>`;
-        });
-        document.getElementById(id).innerHTML = html;
-    }
-
-    function renderVideos(data, id) {
-        let html = '';
-        data.forEach(item => {
-            html += `<div class="video-item" data-category="${item.category}" data-title="${item.title.toLowerCase()}">
-                <div class="video-card"><iframe src="https://www.youtube.com/embed/${item.youtubeId}" allowfullscreen></iframe></div>
-                <div class="video-info"><p class="video-title">${item.title}</p><span class="video-tag">${item.category.toUpperCase()}</span></div></div>`;
-        });
-        document.getElementById(id).innerHTML = html;
-        runFilters();
-    }
-
-    function setCategory(cat, btn) {
-        currentCategory = cat;
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        runFilters();
-    }
-
-    function runFilters() {
-        const search = document.getElementById('portalSearch').value.toLowerCase();
-        const items = document.getElementsByClassName('video-item');
-        for (let item of items) {
-            const matchesSearch = item.getAttribute('data-title').includes(search);
-            const matchesCat = currentCategory === 'all' || item.getAttribute('data-category') === currentCategory;
-            item.style.display = (matchesSearch && matchesCat) ? "block" : "none";
+    // ==========================================
+    // 2. PASSWORD LOGIC
+    // ==========================================
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        if(localStorage.getItem('bjj_session') === 'active') {
+            unlockPortal();
         }
-    }
+    });
 
     document.getElementById('passInput').addEventListener('keypress', (e) => { 
         if (e.key === 'Enter') checkPassword(); 
     });
-</script>
-</body>
-</html>
+
+    function checkPassword() {
+        const input = document.getElementById('passInput').value;
+        if (!input) { alert("Please enter a password."); return; }
+
+        // SIMPLE HASHING (Works everywhere, easier to debug)
+        let hash = 0;
+        for (let i = 0; i < input.length; i++) {
+            let char = input.charCodeAt(i);
+            hash

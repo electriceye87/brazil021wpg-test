@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://brazil021wpg.com/sitemap.xml

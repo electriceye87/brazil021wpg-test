@@ -195,36 +195,83 @@
     let currentCategory = 'all';
     let videoData = [];
 
+    // --- NEW SECURE SESSION CHECK ---
+    // This keeps them logged in if they refresh the page
+    document.addEventListener('DOMContentLoaded', () => {
+        if(localStorage.getItem('bjj_session') === 'active') {
+            document.getElementById('passwordGate').style.display = "none";
+            document.getElementById('memberContent').style.display = "block";
+            loadAllPortalData();
+        }
+    });
+
     function toggleMenu() {
         document.getElementById('navLinks').classList.toggle('open');
     }
 
-    function checkPassword() {
-        if (document.getElementById('passInput').value === "Brazil021") {
+    // --- NEW SECURE PASSWORD FUNCTION ---
+    async function checkPassword() {
+        const input = document.getElementById('passInput').value;
+        
+        // This is the secure hash for "OSS2026"
+        const CORRECT_HASH = "84d89877f0d4041efb6bf91a16f0248f2fd573e6af05c19f96bedb9f882f7882";
+
+        if (!input) {
+            alert("Please enter a password.");
+            return;
+        }
+
+        // Convert user input to hash
+        const msgBuffer = new TextEncoder().encode(input);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const userHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+        if (userHash === CORRECT_HASH) {
+            // Success
             document.getElementById('passwordGate').style.display = "none";
             document.getElementById('memberContent').style.display = "block";
             window.scrollTo(0,0);
+            
+            // Save session
+            localStorage.setItem('bjj_session', 'active');
+            
+            // Load content
             loadAllPortalData();
         } else {
             alert("Incorrect password.");
         }
     }
 
-    async function loadAllPortalData() {
-        loadSection('news.json', 'news-container', renderNews);
-        loadSection('newsletters.json', 'newsletter-container', renderNewsletters);
-        loadSection('videos.json', 'video-container', renderVideos);
+/* --- NEW GOOGLE SHEETS LOGIC --- */
+
+    // PASTE YOUR 3 GOOGLE CSV LINKS HERE
+    const NEWS_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pub?gid=0&single=true&output=csv";
+    const NEWSLETTER_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pub?gid=335399623&single=true&output=csv";
+    const VIDEO_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfg-lI2YjMDfZdXeUKN7PeP4fnd7I8aA3NFxINZjQx4PPQbLsLNXaGEas7ufEgEzCcj7d4vhUqTsUl/pubhtml?gid=17348161&single=true";
+
+    function loadAllPortalData() {
+        console.log("Loading data from Sheets...");
+        loadSheet(NEWS_SHEET_URL, 'news-container', renderNews);
+        loadSheet(NEWSLETTER_SHEET_URL, 'newsletter-container', renderNewsletters);
+        loadSheet(VIDEO_SHEET_URL, 'video-container', renderVideos, true);
     }
 
-    async function loadSection(file, containerId, renderFunc) {
-        try {
-            const response = await fetch(file + '?t=' + new Date().getTime());
-            const data = await response.json();
-            if (file === 'videos.json') videoData = data;
-            renderFunc(data, containerId);
-        } catch (e) {
-            document.getElementById(containerId).innerHTML = "<p>Coming soon.</p>";
-        }
+    function loadSheet(url, containerId, renderFunc, isVideo = false) {
+        Papa.parse(url, {
+            download: true,
+            header: true,
+            skipEmptyLines: true, // Ignores blank rows
+            complete: function(results) {
+                const data = results.data;
+                if (isVideo) videoData = data; // Save for filtering
+                renderFunc(data, containerId);
+            },
+            error: function(err) {
+                console.error("Error loading sheet:", err);
+                document.getElementById(containerId).innerHTML = "<p>Error loading data.</p>";
+            }
+        });
     }
 
     function renderNews(data, id) {
